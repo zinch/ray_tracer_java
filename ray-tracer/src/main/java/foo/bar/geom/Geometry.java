@@ -19,4 +19,12 @@ public class Geometry {
                 && Math.abs(p1[1] - p2[1]) <= EPSILON
                 && Math.abs(p1[2] - p2[2]) <= EPSILON;
     }
+
+    public static double[] add(double[] t1, double[] t2) {
+        double w = t1[3] + t2[3];
+        if (w > 1) {
+            throw new IllegalArgumentException("Cannot add points");
+        }
+        return new double[] {t1[0] + t2[0], t1[1] + t2[1], t1[2] + t2[2], w};
+    }
 }

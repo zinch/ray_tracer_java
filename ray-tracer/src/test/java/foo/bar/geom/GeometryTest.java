@@ -3,6 +3,7 @@ package foo.bar.geom;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -44,5 +45,30 @@ public class GeometryTest {
 
         // then
         assertThat(Geometry.equal(p1, p2)).isTrue();
+    }
+
+    @Test
+    public void should_add_two_vector_to_a_point() {
+        // given
+        var p = Geometry.newPoint(3, -2, 5);
+        var v = Geometry.newVector(-2, 3, 1);
+
+        // when
+        var p1 = Geometry.add(p, v);
+
+        // then
+        assertThat(Geometry.equal(p1, Geometry.newPoint(1, 1, 6))).isTrue();
+    }
+
+    @Test
+    public void should_never_add_two_points() {
+        // given
+        var p1 = Geometry.newPoint(3, -2, 5);
+        var p2 = Geometry.newPoint(-2, 3, 1);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.add(p1, p2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot add points");
     }
 }
