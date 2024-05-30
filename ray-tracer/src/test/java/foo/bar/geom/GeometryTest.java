@@ -14,12 +14,7 @@ public class GeometryTest {
         var point = Geometry.newPoint(4.3, -4.2, 3.1);
 
         // then
-        SoftAssertions.assertSoftly(it -> {
-            it.assertThat(point[0]).isEqualTo(4.3);
-            it.assertThat(point[1]).isEqualTo(-4.2);
-            it.assertThat(point[2]).isEqualTo(3.1);
-            it.assertThat(point[3]).isEqualTo(1.0);
-        });
+        validateTupleComponents(point, 4.3, -4.2, 3.1, 1.0);
     }
 
     @Test
@@ -28,12 +23,7 @@ public class GeometryTest {
         var vector = Geometry.newVector(4.3, -4.2, 3.1);
 
         // then
-        SoftAssertions.assertSoftly(it -> {
-            it.assertThat(vector[0]).isEqualTo(4.3);
-            it.assertThat(vector[1]).isEqualTo(-4.2);
-            it.assertThat(vector[2]).isEqualTo(3.1);
-            it.assertThat(vector[3]).isEqualTo(0.0);
-        });
+        validateTupleComponents(vector, 4.3, -4.2, 3.1, 0.0);
     }
 
     @Test
@@ -57,7 +47,7 @@ public class GeometryTest {
         var p1 = Geometry.add(p, v);
 
         // then
-        assertThat(Geometry.equal(p1, Geometry.newPoint(1, 1, 6))).isTrue();
+        validateTupleComponents(p1, 1, 1, 6, 1);
     }
 
     @Test
@@ -70,5 +60,65 @@ public class GeometryTest {
         Assertions.assertThatThrownBy(() -> Geometry.add(p1, p2))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cannot add points");
+    }
+
+    @Test
+    public void should_produce_vector_when_subtracting_two_points() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+        var p2 = Geometry.newPoint(5, 6, 7);
+
+        // when
+        var v = Geometry.subtract(p1, p2);
+
+        // then
+        validateTupleComponents(v, -2, -4, -6, 0);
+    }
+
+    @Test
+    public void should_produce_point_when_subtracting_vector_from_a_point() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+        var v = Geometry.newVector(5, 6, 7);
+
+        // when
+        var p2 = Geometry.subtract(p1, v);
+
+        // then
+        validateTupleComponents(p2, -2, -4, -6, 1);
+    }
+
+    @Test
+    public void should_produce_vector_when_subtracting_two_vectors() {
+        // given
+        var v1 = Geometry.newVector(3, 2, 1);
+        var v2 = Geometry.newVector(5, 6, 7);
+
+        // when
+        var v3 = Geometry.subtract(v1, v2);
+
+        // then
+        validateTupleComponents(v3, -2, -4, -6, 0);
+    }
+
+    @Test
+    public void should_never_subtract_point_from_a_vector() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+        var v = Geometry.newVector(5, 6, 7);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.subtract(v, p1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot subtract point from vector");
+    }
+
+    private static void validateTupleComponents(double[] vector, double x, double y, double z, double w) {
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(vector[0]).isEqualTo(x);
+            it.assertThat(vector[1]).isEqualTo(y);
+            it.assertThat(vector[2]).isEqualTo(z);
+            it.assertThat(vector[3]).isEqualTo(w);
+        });
     }
 }

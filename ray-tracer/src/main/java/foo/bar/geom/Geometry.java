@@ -27,4 +27,12 @@ public class Geometry {
         }
         return new double[] {t1[0] + t2[0], t1[1] + t2[1], t1[2] + t2[2], w};
     }
+
+    public static double[] subtract(double[] t1, double[] t2) {
+        double w = t1[3] - t2[3];
+        if (w < 0) {
+            throw new IllegalArgumentException("Cannot subtract point from vector");
+        }
+        return new double[] {t1[0] - t2[0], t1[1] - t2[1], t1[2] - t2[2], w};
+    }
 }
