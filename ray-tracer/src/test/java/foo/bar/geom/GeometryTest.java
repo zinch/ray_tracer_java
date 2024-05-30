@@ -228,10 +228,10 @@ public class GeometryTest {
     @Test
     public void should_never_calculate_magnitude_of_a_point() {
         // given
-        var p1 = Geometry.newPoint(3, 2, 1);
+        var p = Geometry.newPoint(3, 2, 1);
 
         // then
-        Assertions.assertThatThrownBy(() -> Geometry.magnitude(p1))
+        Assertions.assertThatThrownBy(() -> Geometry.magnitude(p))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cannot calculate magnitude of a point");
     }
@@ -251,12 +251,34 @@ public class GeometryTest {
     @Test
     public void should_never_normalize_a_point() {
         // given
-        var p1 = Geometry.newPoint(3, 2, 1);
+        var p = Geometry.newPoint(3, 2, 1);
 
         // then
-        Assertions.assertThatThrownBy(() -> Geometry.normalize(p1))
+        Assertions.assertThatThrownBy(() -> Geometry.normalize(p))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cannot normalize a point");
+    }
+
+    @Test
+    public void should_calculate_dot_product() {
+        // given
+        var v1 = Geometry.newVector(1, 2, 3);
+        var v2 = Geometry.newVector(2, 3, 4);
+
+        // then
+        assertThat(Geometry.dot(v1, v2)).isEqualTo(20);
+    }
+
+    @Test
+    public void should_not_calculate_dot_product_for_a_point() {
+        // given
+        var p = Geometry.newPoint(3, 2, 1);
+        var v = Geometry.newVector(2, 2, 3);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.dot(p, v))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Dot product is calculated between two vectors");
     }
 
     private static void validatePointComponents(double[] vector, double x, double y, double z) {

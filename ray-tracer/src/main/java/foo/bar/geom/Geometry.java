@@ -66,4 +66,11 @@ public class Geometry {
         double magnitude = magnitude(v);
         return new double[] {v[0] / magnitude, v[1] / magnitude, v[2] / magnitude, 0.0};
     }
+
+    public static double dot(double[] v1, double[] v2) {
+        if (!(isVector(v1) && isVector(v2))) {
+            throw new IllegalArgumentException("Dot product is calculated between two vectors");
+        }
+        return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+    }
 }
