@@ -144,6 +144,41 @@ public class GeometryTest {
                 .hasMessage("Cannot negate point");
     }
 
+    @Test
+    public void should_multiply_vector_by_scalar() {
+        // given
+        var v = Geometry.newVector(1, -2, 3);
+
+        // when
+        var v1 = Geometry.multiply(v, 3.5);
+
+        // then
+        validateVectorComponents(v1, 3.5, -7, 10.5);
+    }
+
+    @Test
+    public void should_multiply_vector_by_fraction() {
+        // given
+        var v = Geometry.newVector(1, -2, 3);
+
+        // when
+        var v1 = Geometry.multiply(v, 0.5);
+
+        // then
+        validateVectorComponents(v1, 0.5, -1, 1.5);
+    }
+
+    @Test
+    public void should_never_multiply_point_by_scalar() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.multiply(p1, 3.5))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot multiply point by scalar");
+    }
+
     private static void validatePointComponents(double[] vector, double x, double y, double z) {
         validateTupleComponents(vector, x, y, z, 1.0);
     }
