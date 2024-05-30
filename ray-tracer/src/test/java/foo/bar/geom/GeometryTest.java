@@ -1,6 +1,7 @@
 package foo.bar.geom;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
@@ -177,6 +178,62 @@ public class GeometryTest {
         Assertions.assertThatThrownBy(() -> Geometry.multiply(p1, 3.5))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cannot multiply point by scalar");
+    }
+
+    @Test
+    public void should_calculate_magnitude_of_unit_vector_x() {
+        // given
+        var v = Geometry.newVector(1, 0, 0);
+
+        // then
+        assertThat(Geometry.magnitude(v)).isEqualTo(1);
+    }
+
+    @Test
+    public void should_calculate_magnitude_of_unit_vector_y() {
+        // given
+        var v = Geometry.newVector(0, 1, 0);
+
+        // then
+        assertThat(Geometry.magnitude(v)).isEqualTo(1);
+    }
+
+    @Test
+    public void should_calculate_magnitude_of_unit_vector_z() {
+        // given
+        var v = Geometry.newVector(0, 0, 1);
+
+        // then
+        assertThat(Geometry.magnitude(v)).isEqualTo(1);
+    }
+
+    @Test
+    public void should_calculate_magnitude_of_one_vector() {
+        // given
+        var v = Geometry.newVector(1, 2, 3);
+
+        // then
+        assertThat(Geometry.magnitude(v)).isEqualTo(Math.sqrt(14), within(1e-6));
+    }
+
+    @Test
+    public void should_calculate_magnitude_of_another_vector() {
+        // given
+        var v = Geometry.newVector(-1, -2, -3);
+
+        // then
+        assertThat(Geometry.magnitude(v)).isEqualTo(Math.sqrt(14), within(1e-6));
+    }
+
+    @Test
+    public void should_never_calculate_magnitude_of_a_point() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.magnitude(p1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot calculate magnitude of a point");
     }
 
     private static void validatePointComponents(double[] vector, double x, double y, double z) {

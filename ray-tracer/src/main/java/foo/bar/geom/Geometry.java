@@ -51,4 +51,11 @@ public class Geometry {
     private static boolean isVector(double[] tuple) {
         return tuple[3] == 0.0;
     }
+
+    public static double magnitude(double[] v) {
+        if (!isVector(v)) {
+            throw new IllegalArgumentException("Cannot calculate magnitude of a point");
+        }
+        return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    }
 }
