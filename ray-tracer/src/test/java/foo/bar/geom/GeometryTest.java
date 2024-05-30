@@ -281,6 +281,31 @@ public class GeometryTest {
                 .hasMessage("Dot product is calculated between two vectors");
     }
 
+    @Test
+    public void should_calculate_cross_product() {
+        // given
+        var v1 = Geometry.newVector(1, 2, 3);
+        var v2 = Geometry.newVector(2, 3, 4);
+
+        // when
+
+        // then
+        validateVectorComponents(Geometry.cross(v1, v2), -1, 2, -1);
+        validateVectorComponents(Geometry.cross(v2, v1), 1, -2, 1);
+    }
+
+    @Test
+    public void should_not_calculate_cross_product_for_a_point() {
+        // given
+        var p = Geometry.newPoint(3, 2, 1);
+        var v = Geometry.newVector(2, 2, 3);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.cross(p, v))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cross product is calculated between two vectors");
+    }
+
     private static void validatePointComponents(double[] vector, double x, double y, double z) {
         validateTupleComponents(vector, x, y, z, 1.0);
     }

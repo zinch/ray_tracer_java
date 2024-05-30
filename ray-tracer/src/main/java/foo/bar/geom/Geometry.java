@@ -73,4 +73,16 @@ public class Geometry {
         }
         return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
     }
+
+    public static double[] cross(double[] v1, double[] v2) {
+        if (!(isVector(v1) && isVector(v2))) {
+            throw new IllegalArgumentException("Cross product is calculated between two vectors");
+        }
+        return new double[] {
+                v1[1] * v2[2] - v1[2] * v2[1],
+                v1[2] * v2[0] - v1[0] * v2[2],
+                v1[0] * v2[1] - v1[1] * v2[0],
+                0.0
+        };
+    }
 }
