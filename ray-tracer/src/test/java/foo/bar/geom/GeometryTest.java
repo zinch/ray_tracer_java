@@ -1,6 +1,5 @@
 package foo.bar.geom;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.Assertions;
@@ -14,7 +13,7 @@ public class GeometryTest {
         var point = Geometry.newPoint(4.3, -4.2, 3.1);
 
         // then
-        validateTupleComponents(point, 4.3, -4.2, 3.1, 1.0);
+        validatePointComponents(point, 4.3, -4.2, 3.1);
     }
 
     @Test
@@ -23,7 +22,7 @@ public class GeometryTest {
         var vector = Geometry.newVector(4.3, -4.2, 3.1);
 
         // then
-        validateTupleComponents(vector, 4.3, -4.2, 3.1, 0.0);
+        validateVectorComponents(vector, 4.3, -4.2, 3.1);
     }
 
     @Test
@@ -47,7 +46,7 @@ public class GeometryTest {
         var p1 = Geometry.add(p, v);
 
         // then
-        validateTupleComponents(p1, 1, 1, 6, 1);
+        validatePointComponents(p1, 1, 1, 6);
     }
 
     @Test
@@ -72,7 +71,7 @@ public class GeometryTest {
         var v = Geometry.subtract(p1, p2);
 
         // then
-        validateTupleComponents(v, -2, -4, -6, 0);
+        validateVectorComponents(v, -2, -4, -6);
     }
 
     @Test
@@ -85,7 +84,7 @@ public class GeometryTest {
         var p2 = Geometry.subtract(p1, v);
 
         // then
-        validateTupleComponents(p2, -2, -4, -6, 1);
+        validatePointComponents(p2, -2, -4, -6);
     }
 
     @Test
@@ -98,7 +97,7 @@ public class GeometryTest {
         var v3 = Geometry.subtract(v1, v2);
 
         // then
-        validateTupleComponents(v3, -2, -4, -6, 0);
+        validateVectorComponents(v3, -2, -4, -6);
     }
 
     @Test
@@ -111,6 +110,14 @@ public class GeometryTest {
         Assertions.assertThatThrownBy(() -> Geometry.subtract(v, p1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cannot subtract point from vector");
+    }
+
+    private static void validatePointComponents(double[] vector, double x, double y, double z) {
+        validateTupleComponents(vector, x, y, z, 1.0);
+    }
+
+    private static void validateVectorComponents(double[] vector, double x, double y, double z) {
+        validateTupleComponents(vector, x, y, z, 0.0);
     }
 
     private static void validateTupleComponents(double[] vector, double x, double y, double z, double w) {
