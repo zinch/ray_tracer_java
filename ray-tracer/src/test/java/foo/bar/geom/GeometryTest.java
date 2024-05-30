@@ -1,6 +1,8 @@
 package foo.bar.geom;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -31,5 +33,16 @@ public class GeometryTest {
             it.assertThat(vector[2]).isEqualTo(3.1);
             it.assertThat(vector[3]).isEqualTo(0.0);
         });
+    }
+
+    @Test
+    public void should_compare_two_points() {
+        // given
+        var epsilon = 1e-6;
+        var p1 = Geometry.newPoint(1.2, 3.4, 5.6);
+        var p2 = Geometry.newPoint(1.2 + epsilon, 3.4 - epsilon, 5.6 + epsilon);
+
+        // then
+        assertThat(Geometry.equal(p1, p2)).isTrue();
     }
 }
