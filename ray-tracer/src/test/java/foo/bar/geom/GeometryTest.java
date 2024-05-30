@@ -112,6 +112,38 @@ public class GeometryTest {
                 .hasMessage("Cannot subtract point from vector");
     }
 
+    @Test
+    public void should_subtract_vector_from_the_zero_vector() {
+        // given
+        var v = Geometry.newVector(1, -2, 3);
+
+        // when
+        var v1 = Geometry.subtract(Geometry.newVector(0, 0, 0), v);
+
+        // then
+        validateVectorComponents(v1, -1, 2, -3);
+    }
+
+    @Test
+    public void should_negate_vector() {
+        // given
+        var v = Geometry.newVector(1, -2, 3);
+
+        // then
+        validateVectorComponents(Geometry.negate(v), -1, 2, -3);
+    }
+
+    @Test
+    public void should_never_negate_point() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.negate(p1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot negate point");
+    }
+
     private static void validatePointComponents(double[] vector, double x, double y, double z) {
         validateTupleComponents(vector, x, y, z, 1.0);
     }

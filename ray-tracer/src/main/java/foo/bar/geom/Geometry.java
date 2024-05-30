@@ -35,4 +35,11 @@ public class Geometry {
         }
         return new double[] {t1[0] - t2[0], t1[1] - t2[1], t1[2] - t2[2], w};
     }
+
+    public static double[] negate(double[] v) {
+        if (v[3] > 0) {
+            throw new IllegalArgumentException("Cannot negate point");
+        }
+        return new double[] {-v[0], -v[1], -v[2], 0.0};
+    }
 }
