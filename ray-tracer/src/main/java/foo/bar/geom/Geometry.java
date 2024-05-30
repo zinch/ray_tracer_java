@@ -58,4 +58,12 @@ public class Geometry {
         }
         return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     }
+
+    public static double[] normalize(double[] v) {
+        if (!isVector(v)) {
+            throw new IllegalArgumentException("Cannot normalize a point");
+        }
+        double magnitude = magnitude(v);
+        return new double[] {v[0] / magnitude, v[1] / magnitude, v[2] / magnitude, 0.0};
+    }
 }

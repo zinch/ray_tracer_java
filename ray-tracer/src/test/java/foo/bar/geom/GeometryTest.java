@@ -236,6 +236,29 @@ public class GeometryTest {
                 .hasMessage("Cannot calculate magnitude of a point");
     }
 
+    @Test
+    public void should_normalize_vector_x() {
+        // given
+        var v = Geometry.newVector(4, 0, 0);
+
+        // when
+        var u = Geometry.normalize(v);
+
+        // then
+        validateVectorComponents(u, 1, 0, 0);
+    }
+
+    @Test
+    public void should_never_normalize_a_point() {
+        // given
+        var p1 = Geometry.newPoint(3, 2, 1);
+
+        // then
+        Assertions.assertThatThrownBy(() -> Geometry.normalize(p1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot normalize a point");
+    }
+
     private static void validatePointComponents(double[] vector, double x, double y, double z) {
         validateTupleComponents(vector, x, y, z, 1.0);
     }
