@@ -9,6 +9,10 @@ public class Color {
         t = new Tuple(red, green, blue, 0.0);
     }
 
+    protected Color(Tuple t) {
+        this.t = t;
+    }
+
     public double red() {
         return t.x();
     }
@@ -24,5 +28,13 @@ public class Color {
     @Override
     public String toString() {
         return "Color(" + t.x() + ", " + t.y() + ", " + t.z() + ")";
+    }
+
+    public Color add(Color c) {
+        return new Color(t.add(c.t));
+    }
+
+    public Color subtract(Color c) {
+        return new Color(t.subtract(c.t));
     }
 }

@@ -1,5 +1,7 @@
 package foo.bar.color;
 
+import static org.assertj.core.api.Assertions.within;
+
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -13,13 +15,39 @@ public class ColorTest {
         validateColorComponents(c, -0.5, 0.4, 1.7);
     }
 
+    @Test
+    public void should_add_colors() {
+        // given
+        var c1 = new Color(0.9, 0.6, 0.75);
+        var c2 = new Color(0.7, 0.1, 0.25);
+
+        // when
+        var c = c1.add(c2);
+
+        // then
+        validateColorComponents(c, 1.6, 0.7, 1.0);
+    }
+
+    @Test
+    public void should_subtract_colors() {
+        // given
+        var c1 = new Color(0.9, 0.6, 0.75);
+        var c2 = new Color(0.7, 0.1, 0.25);
+
+        // when
+        var c = c1.subtract(c2);
+
+        // then
+        validateColorComponents(c, 0.2, 0.5, 0.5);
+    }
+
     public static void validateColorComponents(
             Color c, double expectedRed, double expectedGreen, double expectedBlue)
     {
         SoftAssertions.assertSoftly(it -> {
-            it.assertThat(c.red()).isEqualTo(expectedRed);
-            it.assertThat(c.green()).isEqualTo(expectedGreen);
-            it.assertThat(c.blue()).isEqualTo(expectedBlue);
+            it.assertThat(c.red()).isEqualTo(expectedRed, within(1e-5));
+            it.assertThat(c.green()).isEqualTo(expectedGreen, within(1e-5));
+            it.assertThat(c.blue()).isEqualTo(expectedBlue, within(1e-5));
         });
     }
 }
