@@ -81,10 +81,7 @@ public final class Canvas {
                 line = appendOrStartNewLine(normalize(c.blue()), line, sb);
             }
 
-            sb.append(line);
-            if (y < height - 1) {
-                sb.append('\n');
-            }
+            sb.append(line).append('\n');
         }
 
         return sb.toString();
