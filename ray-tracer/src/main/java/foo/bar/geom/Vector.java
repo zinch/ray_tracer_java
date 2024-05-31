@@ -29,7 +29,7 @@ public class Vector {
 
     @Override
     public String toString() {
-        return "Vector(" + t.x() + ", " + t.y() + ", " + t.z() + ")";
+        return "Vector(" + x() + ", " + y() + ", " + z() + ")";
     }
 
     public Vector add(Vector v) {
@@ -41,7 +41,7 @@ public class Vector {
     }
 
     public Vector negate() {
-        return new Vector(-t.x(), -t.y(), -t.z());
+        return new Vector(-x(), -y(), -z());
     }
 
     public Vector multiply(double scalar) {
@@ -49,22 +49,22 @@ public class Vector {
     }
 
     public double magnitude() {
-        return Math.sqrt(t.x() * t.x() + t.y() * t.y() + t.z() * t.z());
+        return Math.sqrt(x() * x() + y() * y() + z() * z());
     }
 
     public Vector normalize() {
         var magnitude = magnitude();
-        return new Vector(t.x() / magnitude, t.y() / magnitude, t.z() / magnitude);
+        return new Vector(x() / magnitude, y() / magnitude, z() / magnitude);
     }
 
     public double dot(Vector v) {
-        return t.x() * v.x() + t.y() * v.y() + t.z() * v.z();
+        return x() * v.x() + y() * v.y() + z() * v.z();
     }
 
     public Vector cross(Vector v) {
         return new Vector(
-                t.y() * v.z() - t.z() * v.y(),
-                t.z() * v.x() - t.x() * v.z(),
-                t.x() * v.y() - t.y() * v.x());
+                y() * v.z() - z() * v.y(),
+                z() * v.x() - x() * v.z(),
+                x() * v.y() - y() * v.x());
     }
 }

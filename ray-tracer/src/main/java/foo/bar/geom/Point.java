@@ -25,11 +25,11 @@ public class Point {
 
     @Override
     public String toString() {
-        return "Point(" + t.x() + ", " + t.y() + ", " + t.z() + ")";
+        return "Point(" + x() + ", " + y() + ", " + z() + ")";
     }
 
     public Point add(Vector v) {
-        return new Point(t.x() + v.x(), t.y() + v.y(), t.z() + v.z());
+        return new Point(x() + v.x(), y() + v.y(), z() + v.z());
     }
 
     public Vector subtract(Point p) {
@@ -37,6 +37,6 @@ public class Point {
     }
 
     public Point subtract(Vector v) {
-        return new Point(t.x() - v.x(), t.y() - v.y(), t.z() - v.z());
+        return new Point(x() - v.x(), y() - v.y(), z() - v.z());
     }
 }
