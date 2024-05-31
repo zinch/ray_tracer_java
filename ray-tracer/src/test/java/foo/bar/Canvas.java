@@ -11,6 +11,7 @@ public final class Canvas {
             %d %d
             255
             """;
+    private static final int MAX_LINE_LENGTH = 70;
     private final int width;
     private final int height;
     private final Color[] canvas;
@@ -71,15 +72,16 @@ public final class Canvas {
         var sb = new StringBuilder(PPM_HEADER_TEMPLATE.formatted(width, height));
 
         for (int y = 0; y < height; y++) {
+            var line = new StringBuilder();
+
             for (int x = 0; x < width; x++) {
                 var c = colorAt(x, y);
-                sb.append(normalize(c.red())).append(" ");
-                sb.append(normalize(c.green())).append(" ");
-                sb.append(normalize(c.blue()));
-                if (x != width - 1) {
-                    sb.append(" ");
-                }
+                line = appendOrStartNewLine(normalize(c.red()), line, sb);
+                line = appendOrStartNewLine(normalize(c.green()), line, sb);
+                line = appendOrStartNewLine(normalize(c.blue()), line, sb);
             }
+
+            sb.append(line);
             if (y < height - 1) {
                 sb.append('\n');
             }
@@ -90,5 +92,19 @@ public final class Canvas {
 
     private int normalize(double value) {
         return (int) Math.max(0, Math.min(255, Math.round(value * 255)));
+    }
+
+    private static StringBuilder appendOrStartNewLine(int value, StringBuilder line, StringBuilder sb) {
+        if (line.length() + 4 > MAX_LINE_LENGTH) {
+            sb.append(line).append('\n');
+            line = new StringBuilder();
+        }
+
+        if (!line.isEmpty()) {
+            line.append(' ');
+        }
+        line.append(value);
+
+        return line;
     }
 }

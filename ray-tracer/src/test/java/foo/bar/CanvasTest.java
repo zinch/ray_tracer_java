@@ -69,4 +69,27 @@ public class CanvasTest {
             0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
             0 0 0 0 0 0 0 0 0 0 0 0 0 0 255""");
     }
+
+    @Test
+    public void should_split_long_lines_in_PPM() {
+        // given
+        var c = new Canvas(10, 2);
+
+        var color = new Color(1, 0.8, 0.6);
+        for (int y = 0; y < c.height(); y++) {
+            for (int x = 0; x < c.width(); x++) {
+                c.writePixel(color, x, y);
+            }
+        }
+
+        // when
+        var ppm = c.toPpm();
+
+        // then
+        assertThat(ppm).endsWith("""
+            255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+            153 255 204 153 255 204 153 255 204 153 255 204 153
+            255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+            153 255 204 153 255 204 153 255 204 153 255 204 153""");
+    }
 }
