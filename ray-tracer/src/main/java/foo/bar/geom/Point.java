@@ -33,7 +33,7 @@ public class Point {
     }
 
     public Vector subtract(Point p) {
-        return new Vector(t.x() - p.x(), t.y() - p.y(), t.z() - p.z());
+        return new Vector(t.subtract(p.t));
     }
 
     public Point subtract(Vector v) {

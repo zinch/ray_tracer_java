@@ -7,6 +7,10 @@ public class Vector {
         this.t = new Tuple(x, y, z, 0.0);
     }
 
+    Vector(Tuple t) {
+        this.t = t;
+    }
+
     public double x() {
         return t.x();
     }
@@ -29,11 +33,11 @@ public class Vector {
     }
 
     public Vector add(Vector v) {
-        return new Vector(t.x() + v.x(), t.y() + v.y(), t.z() + v.z());
+        return new Vector(t.add(v.t));
     }
 
     public Vector subtract(Vector v) {
-        return new Vector(t.x() - v.x(), t.y() - v.y(), t.z() - v.z());
+        return new Vector(t.subtract(v.t));
     }
 
     public Vector negate() {
