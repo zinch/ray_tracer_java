@@ -18,6 +18,7 @@ public class PointTest {
             it.assertThat(p.x()).isEqualTo(expectedX);
             it.assertThat(p.y()).isEqualTo(expectedY);
             it.assertThat(p.z()).isEqualTo(expectedZ);
+            it.assertThat(p.w()).isEqualTo(1.0);
         });
     }
 }

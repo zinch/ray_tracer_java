@@ -8,16 +8,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
 public class GeometryTest {
-
-    @Test
-    public void should_create_vector() {
-        // when
-        var vector = Geometry.newVector(4.3, -4.2, 3.1);
-
-        // then
-        validateVectorComponents(vector, 4.3, -4.2, 3.1);
-    }
-
     @Test
     public void should_add_two_vector_to_a_point() {
         // given

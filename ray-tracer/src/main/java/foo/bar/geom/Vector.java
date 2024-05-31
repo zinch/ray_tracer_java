@@ -1,10 +1,10 @@
 package foo.bar.geom;
 
-public class Point {
+public class Vector {
     private final Tuple t;
 
-    public Point(double x, double y, double z) {
-        t = new Tuple(x, y, z, 1.0);
+    public Vector(double x, double y, double z) {
+        this.t = new Tuple(x, y, z, 0.0);
     }
 
     public double x() {
@@ -21,5 +21,10 @@ public class Point {
 
     double w() {
         return t.w();
+    }
+
+    @Override
+    public String toString() {
+        return "Vector(" + t.x() + ", " + t.y() + ", " + t.z() + ")";
     }
 }
