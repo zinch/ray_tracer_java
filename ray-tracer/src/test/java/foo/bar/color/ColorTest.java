@@ -53,6 +53,19 @@ public class ColorTest {
         validateColorComponents(c2, 0.4, 0.6, 0.8);
     }
 
+    @Test
+    public void should_blend_colors() {
+        // given
+        var c1 = new Color(1, 0.2, 0.4);
+        var c2 = new Color(0.9, 1, 0.1);
+
+        // when
+        var c = c1.blend(c2);
+
+        // then
+        validateColorComponents(c, 0.9, 0.2, 0.04);
+    }
+
     public static void validateColorComponents(
             Color c, double expectedRed, double expectedGreen, double expectedBlue)
     {

@@ -41,4 +41,8 @@ public class Color {
     public Color multiply(double scalar) {
         return new Color(t.multiply(scalar));
     }
+
+    public Color blend(Color c) {
+        return new Color(red() * c.red(), green() * c.green(), blue() * c.blue());
+    }
 }
