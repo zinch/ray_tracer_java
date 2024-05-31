@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public final class Canvas {
+    private static final String PPM_HEADER_TEMPLATE = """
+            P3
+            %d %d
+            255
+            """;
     private final int width;
     private final int height;
     private final Color[] canvas;
@@ -60,5 +65,30 @@ public final class Canvas {
 
     public void writePixel(Color color, int x, int y) {
         this.canvas[idx(x, y)] = color;
+    }
+
+    public String toPpm() {
+        var sb = new StringBuilder(PPM_HEADER_TEMPLATE.formatted(width, height));
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                var c = colorAt(x, y);
+                sb.append(normalize(c.red())).append(" ");
+                sb.append(normalize(c.green())).append(" ");
+                sb.append(normalize(c.blue()));
+                if (x != width - 1) {
+                    sb.append(" ");
+                }
+            }
+            if (y < height - 1) {
+                sb.append('\n');
+            }
+        }
+
+        return sb.toString();
+    }
+
+    private int normalize(double value) {
+        return (int) Math.max(0, Math.min(255, Math.round(value * 255)));
     }
 }

@@ -36,4 +36,37 @@ public class CanvasTest {
         var pixel = c.colorAt(2, 3);
         assertThat(pixel).isEqualTo(new Color(1.0, 0, 0));
     }
+
+    @Test
+    public void should_construct_ppm_header() {
+        // given
+        var c = new Canvas(5, 3);
+
+        // when
+        var ppm = c.toPpm();
+
+        // then
+        assertThat(ppm).startsWith("""
+            P3
+            5 3
+            255""");
+    }
+
+    @Test
+    public void should_construct_ppm_with_pixels() {
+        // given
+        var c = new Canvas(5, 3);
+        c.writePixel(new Color(1.5, 0, 0), 0, 0);
+        c.writePixel(new Color(0, 0.5, 0), 2, 1);
+        c.writePixel(new Color(-0.5, 0, 1), 4, 2);
+
+        // when
+        var ppm = c.toPpm();
+
+        // then
+        assertThat(ppm).endsWith("""
+            255 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+            0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
+            0 0 0 0 0 0 0 0 0 0 0 0 0 0 255""");
+    }
 }
