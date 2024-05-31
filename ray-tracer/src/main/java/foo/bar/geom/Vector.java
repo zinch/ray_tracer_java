@@ -45,7 +45,7 @@ public class Vector {
     }
 
     public Vector multiply(double scalar) {
-        return new Vector(t.x() * scalar, t.y() * scalar, t.z() * scalar);
+        return new Vector(t.multiply(scalar));
     }
 
     public double magnitude() {
