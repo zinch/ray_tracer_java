@@ -44,6 +44,18 @@ public class TupleTest {
         assertThat(t1).isEqualTo(t2);
     }
 
+    @Test
+    public void should_multiply_tuple_by_scalar() {
+        // given
+        var t1 = new Tuple(2.5, -3.5, 1.7, 1.0);
+
+        // when
+        var t2 = t1.multiply(2);
+
+        // then
+        validateTupleComponents(t2, 5.0, -7.0, 3.4, 2.0);
+    }
+
     static void validateTupleComponents(
             Tuple t, double expectedX, double expectedY, double expectedZ, double expectedW) {
         SoftAssertions.assertSoftly(it -> {

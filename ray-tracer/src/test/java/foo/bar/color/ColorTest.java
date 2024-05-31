@@ -41,6 +41,18 @@ public class ColorTest {
         validateColorComponents(c, 0.2, 0.5, 0.5);
     }
 
+    @Test
+    public void should_multiply_color_by_scalar() {
+        // given
+        var c1 = new Color(0.2, 0.3, 0.4);
+
+        // when
+        var c2 = c1.multiply(2);
+
+        // then
+        validateColorComponents(c2, 0.4, 0.6, 0.8);
+    }
+
     public static void validateColorComponents(
             Color c, double expectedRed, double expectedGreen, double expectedBlue)
     {

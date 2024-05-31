@@ -37,4 +37,8 @@ public class Color {
     public Color subtract(Color c) {
         return new Color(t.subtract(c.t));
     }
+
+    public Color multiply(double scalar) {
+        return new Color(t.multiply(scalar));
+    }
 }

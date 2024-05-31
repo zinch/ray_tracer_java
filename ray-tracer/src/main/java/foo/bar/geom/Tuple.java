@@ -25,4 +25,8 @@ public record Tuple(double x, double y, double z, double w) {
     public Tuple subtract(Tuple t) {
         return new Tuple(x - t.x, y - t.y, z - t.z, w - t.w);
     }
+
+    public Tuple multiply(double scalar) {
+        return new Tuple(x * scalar, y * scalar, z * scalar, w * scalar);
+    }
 }
