@@ -58,4 +58,23 @@ public class Matrix {
     public String toString() {
         return "Matrix" + Arrays.toString(values);
     }
+
+    public Matrix multiply(Matrix m) {
+        if (dimension != m.dimension) {
+            throw new IllegalArgumentException("Matrix dimensions don't match");
+        }
+        var result = new double[dimension * dimension];
+
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                double value = 0;
+                for (int k = 0; k < dimension; k++) {
+                    value += at(row, k) * m.at(k, col);
+                }
+                result[idx(row, col)] = value;
+            }
+        }
+
+        return new Matrix(result);
+    }
 }

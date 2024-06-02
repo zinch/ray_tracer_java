@@ -116,4 +116,36 @@ public class MatrixTest {
         assertThat(m1).isNotEqualTo(m2);
         assertThat(m2).isNotEqualTo(m1);
     }
+
+    @Test
+    public void should_multiply_two_matrices() {
+        // given
+        var m1 = new Matrix(
+            new double[] {
+                1, 2, 3, 4,
+                5, 6, 7, 8,
+                9, 8, 7, 6,
+                5, 4, 3, 2
+            }
+        );
+        var m2 = new Matrix(
+            new double[] {
+                -2, 1, 2, 3,
+                3, 2, 1, -1,
+                4, 3, 6, 5,
+                1, 2, 7, 8
+            }
+        );
+
+        // when
+        var m3 = m1.multiply(m2);
+
+        // then
+        assertThat(m3).isEqualTo(new Matrix(new double[] {
+            20, 22, 50, 48,
+            44, 54, 114, 108,
+            40, 58, 110, 102,
+            16, 26, 46, 42
+        }));
+    }
 }
