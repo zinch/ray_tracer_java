@@ -8,14 +8,13 @@ public record Tuple(double x, double y, double z, double w) {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof Tuple t) {
-            return Math.abs(x - t.x) <= EPSILON
-                    && Math.abs(y - t.y) <= EPSILON
-                    && Math.abs(z - t.z) <= EPSILON
-                    && Math.abs(w - t.w) <= EPSILON;
-        } else {
+        if (!(obj instanceof Tuple t)) {
             return false;
         }
+        return Math.abs(x - t.x) <= EPSILON
+            && Math.abs(y - t.y) <= EPSILON
+            && Math.abs(z - t.z) <= EPSILON
+            && Math.abs(w - t.w) <= EPSILON;
     }
 
     public Tuple add(Tuple t) {

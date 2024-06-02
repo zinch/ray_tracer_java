@@ -39,11 +39,10 @@ public class Color {
         if (this == o) {
             return true;
         }
-        if (o instanceof Color color) {
-            return t.equals(color.t);
-        } else {
+        if (!(o instanceof Color color)) {
             return false;
         }
+        return t.equals(color.t);
     }
 
     @Override
