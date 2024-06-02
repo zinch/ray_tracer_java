@@ -1,5 +1,6 @@
 package foo.bar.math;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Matrix {
@@ -24,5 +25,37 @@ public class Matrix {
 
     private int idx(int row, int col) {
         return row * dimension + col;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Matrix matrix)) {
+            return false;
+        }
+        if (dimension != matrix.dimension) {
+            return false;
+        }
+
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                if (!MathUtils.areEqual(at(row, col), matrix.at(row, col))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.hashCode(values), dimension);
+    }
+
+    @Override
+    public String toString() {
+        return "Matrix" + Arrays.toString(values);
     }
 }

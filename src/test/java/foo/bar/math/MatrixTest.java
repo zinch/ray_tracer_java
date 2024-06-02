@@ -1,5 +1,7 @@
 package foo.bar.math;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -65,5 +67,53 @@ public class MatrixTest {
             it.assertThat(matrix.at(1, 1)).isEqualTo(-2);
             it.assertThat(matrix.at(2, 2)).isEqualTo(1);
         });
+    }
+
+    @Test
+    public void should_test_matrices_for_equality() {
+        // given
+        var m1 = new Matrix(
+            new double[] {
+                1, 2, 3, 4,
+                5.5, 6.5, 7.5, 8.5,
+                9, 10, 11, 12,
+                13.5, 14.5, 15.5, 16.5
+            }
+        );
+        var m2 = new Matrix(
+            new double[] {
+                1, 2, 3, 4 - 1e-7,
+                5.5, 6.5, 7.5, 8.5,
+                9, 10, 11, 12 + 1e-7,
+                13.5, 14.5, 15.5, 16.5
+            }
+        );
+
+        // then
+        assertThat(m1).isEqualTo(m2);
+        assertThat(m2).isEqualTo(m1);
+    }
+
+    @Test
+    public void should_detect_non_equal_matrices() {
+        // given
+        var m1 = new Matrix(
+            new double[] {
+                1, 2, 3,
+                5.5, 6.5, 7.5,
+                9, 10, 11
+            }
+        );
+        var m2 = new Matrix(
+            new double[] {
+                2, 3, 4,
+                6.5, 7.5, 8.5,
+                10, 11, 12
+            }
+        );
+
+        // then
+        assertThat(m1).isNotEqualTo(m2);
+        assertThat(m2).isNotEqualTo(m1);
     }
 }

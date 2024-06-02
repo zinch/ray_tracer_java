@@ -1,8 +1,8 @@
 package foo.bar.geom;
 
-public record Tuple(double x, double y, double z, double w) {
-    private static final double EPSILON = 1e-6;
+import foo.bar.math.MathUtils;
 
+public record Tuple(double x, double y, double z, double w) {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -11,10 +11,10 @@ public record Tuple(double x, double y, double z, double w) {
         if (!(obj instanceof Tuple t)) {
             return false;
         }
-        return Math.abs(x - t.x) <= EPSILON
-            && Math.abs(y - t.y) <= EPSILON
-            && Math.abs(z - t.z) <= EPSILON
-            && Math.abs(w - t.w) <= EPSILON;
+        return MathUtils.areEqual(x, t.x)
+            && MathUtils.areEqual(y, t.y)
+            && MathUtils.areEqual(z, t.z)
+            && MathUtils.areEqual(w, t.w);
     }
 
     public Tuple add(Tuple t) {
