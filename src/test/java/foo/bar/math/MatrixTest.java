@@ -229,4 +229,9 @@ public class MatrixTest {
             0, 8, 3, 8
         }));
     }
+
+    @Test
+    public void should_not_affect_identity_matrix_by_transposing() {
+        assertThat(Matrix.IDENTITY.transpose()).isEqualTo(Matrix.IDENTITY);
+    }
 }
