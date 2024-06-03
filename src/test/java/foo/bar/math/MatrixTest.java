@@ -205,4 +205,28 @@ public class MatrixTest {
         // then
         assertThat(t2).isEqualTo(new Tuple(1, 2, 3, 4));
     }
+
+    @Test
+    public void should_transpose_matrix() {
+        // given
+        var m1 = new Matrix(
+            new double[] {
+                0, 9, 3, 0,
+                9, 8, 0, 8,
+                1, 8, 5, 3,
+                0, 0, 5, 8
+            }
+        );
+
+        // when
+        var m2 = m1.transpose();
+
+        // then
+        assertThat(m2).isEqualTo(new Matrix(new double[] {
+            0, 9, 1, 0,
+            9, 8, 8, 0,
+            3, 0, 5, 5,
+            0, 8, 3, 8
+        }));
+    }
 }

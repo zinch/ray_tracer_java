@@ -98,4 +98,14 @@ public class Matrix {
 
         return new Tuple(x, y, z, w);
     }
+
+    public Matrix transpose() {
+        var result = new double[dimension * dimension];
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                result[idx(row, col)] = at(col, row);
+            }
+        }
+        return new Matrix(result);
+    }
 }
