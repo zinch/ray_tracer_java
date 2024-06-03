@@ -2,6 +2,7 @@ package foo.bar.math;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import foo.bar.geom.Tuple;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -147,5 +148,25 @@ public class MatrixTest {
             40, 58, 110, 102,
             16, 26, 46, 42
         }));
+    }
+
+    @Test
+    public void should_multiply_matrix_by_typle() {
+        // given
+        var m = new Matrix(
+            new double[] {
+                1, 2, 3, 4,
+                2, 4, 4, 2,
+                8, 6, 4, 1,
+                0, 0, 0, 1
+            }
+        );
+        var t = new Tuple(1, 2, 3, 1);
+
+        // when
+        var t2 = m.multiply(t);
+
+        // then
+        assertThat(t2).isEqualTo(new Tuple(18, 24, 33, 1));
     }
 }

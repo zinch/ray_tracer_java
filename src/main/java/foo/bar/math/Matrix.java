@@ -1,5 +1,7 @@
 package foo.bar.math;
 
+import foo.bar.geom.Tuple;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -76,5 +78,17 @@ public class Matrix {
         }
 
         return new Matrix(result);
+    }
+
+    public Tuple multiply(Tuple t) {
+        if (dimension != 4) {
+            throw new IllegalArgumentException("Can multiply 4x4 matrix by tuple");
+        }
+        double x = at(0, 0) * t.x() + at(0, 1) * t.y() + at(0, 2) * t.z() + at(0, 3) * t.w();
+        double y = at(1, 0) * t.x() + at(1, 1) * t.y() + at(1, 2) * t.z() + at(1, 3) * t.w();
+        double z = at(2, 0) * t.x() + at(2, 1) * t.y() + at(2, 2) * t.z() + at(2, 3) * t.w();
+        double w = at(3, 0) * t.x() + at(3, 1) * t.y() + at(3, 2) * t.z() + at(3, 3) * t.w();
+
+        return new Tuple(x, y, z, w);
     }
 }
