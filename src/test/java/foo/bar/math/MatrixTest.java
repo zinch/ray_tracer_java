@@ -169,4 +169,40 @@ public class MatrixTest {
         // then
         assertThat(t2).isEqualTo(new Tuple(18, 24, 33, 1));
     }
+
+    @Test
+    public void should_not_change_original_matrix_after_multiplying_by_identity_matrix() {
+        // given
+        var m1 = new Matrix(
+            new double[] {
+                0, 1, 2, 4,
+                1, 2, 4, 8,
+                2, 4, 8, 16,
+                4, 8, 16, 32
+            }
+        );
+
+        // when
+        var m2 = m1.multiply(Matrix.IDENTITY);
+
+        // then
+        assertThat(m2).isEqualTo(new Matrix(new double[] {
+            0, 1, 2, 4,
+            1, 2, 4, 8,
+            2, 4, 8, 16,
+            4, 8, 16, 32
+        }));
+    }
+
+    @Test
+    public void should_not_change_original_tuple_after_multiplying_by_identity_matrix() {
+        // given
+        var t1 = new Tuple(1, 2, 3, 4);
+
+        // when
+        var t2 = Matrix.IDENTITY.multiply(t1);
+
+        // then
+        assertThat(t2).isEqualTo(new Tuple(1, 2, 3, 4));
+    }
 }

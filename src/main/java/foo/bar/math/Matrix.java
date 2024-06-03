@@ -6,6 +6,13 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Matrix {
+    public static final Matrix IDENTITY = new Matrix(new double[] {
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    });
+
     private final double[] values;
     private final int dimension;
 
