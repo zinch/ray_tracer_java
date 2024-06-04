@@ -108,4 +108,11 @@ public class Matrix {
         }
         return new Matrix(result);
     }
+
+    public double determinant() {
+        if (dimension == 2) {
+            return values[0] * values[3] - values[1] * values[2];
+        }
+        return 0;
+    }
 }

@@ -234,4 +234,16 @@ public class MatrixTest {
     public void should_not_affect_identity_matrix_by_transposing() {
         assertThat(Matrix.IDENTITY.transpose()).isEqualTo(Matrix.IDENTITY);
     }
+
+    @Test
+    public void should_calculate_determinant_of_2x2_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            1, 5,
+            -3, 2
+        });
+
+        // then
+        assertThat(m.determinant()).isEqualTo(17);
+    }
 }
