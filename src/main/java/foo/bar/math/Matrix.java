@@ -151,4 +151,8 @@ public class Matrix {
         var sign = (row + col) % 2 == 0 ? 1 : -1;
         return sign * submatrix(row, col).determinant();
     }
+
+    public boolean isInvertible() {
+        return !MathUtils.areEqual(determinant(), 0);
+    }
 }

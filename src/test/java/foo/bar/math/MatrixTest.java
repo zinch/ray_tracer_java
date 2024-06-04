@@ -333,10 +333,10 @@ public class MatrixTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            assertThat(m.cofactor(0, 0)).isEqualTo(56);
-            assertThat(m.cofactor(0, 1)).isEqualTo(12);
-            assertThat(m.cofactor(0, 2)).isEqualTo(-46);
-            assertThat(m.determinant()).isEqualTo(-196);
+            it.assertThat(m.cofactor(0, 0)).isEqualTo(56);
+            it.assertThat(m.cofactor(0, 1)).isEqualTo(12);
+            it.assertThat(m.cofactor(0, 2)).isEqualTo(-46);
+            it.assertThat(m.determinant()).isEqualTo(-196);
         });
     }
 
@@ -352,11 +352,45 @@ public class MatrixTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            assertThat(m.cofactor(0, 0)).isEqualTo(690);
-            assertThat(m.cofactor(0, 1)).isEqualTo(447);
-            assertThat(m.cofactor(0, 2)).isEqualTo(210);
-            assertThat(m.cofactor(0, 3)).isEqualTo(51);
-            assertThat(m.determinant()).isEqualTo(-4071);
+            it.assertThat(m.cofactor(0, 0)).isEqualTo(690);
+            it.assertThat(m.cofactor(0, 1)).isEqualTo(447);
+            it.assertThat(m.cofactor(0, 2)).isEqualTo(210);
+            it.assertThat(m.cofactor(0, 3)).isEqualTo(51);
+            it.assertThat(m.determinant()).isEqualTo(-4071);
+        });
+    }
+
+    @Test
+    public void should_determine_invertible_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            6, 4, 4, 4,
+            5, 5, 7, 6,
+            4, -9, 3, -7,
+            9, 1, 7, -6
+        });
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(m.determinant()).isEqualTo(-2120);
+            it.assertThat(m.isInvertible()).isTrue();
+        });
+    }
+
+    @Test
+    public void should_determine_non_invertible_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            -4, 2, -2, -3,
+            9, 6, 2, 6,
+            0, -5, 1, -5,
+            0, 0, 0, 0
+        });
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(m.determinant()).isEqualTo(0);
+            it.assertThat(m.isInvertible()).isFalse();
         });
     }
 }
