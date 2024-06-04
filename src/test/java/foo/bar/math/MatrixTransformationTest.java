@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import foo.bar.geom.Point;
 import foo.bar.geom.Vector;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
 public class MatrixTransformationTest {
@@ -75,5 +76,29 @@ public class MatrixTransformationTest {
 
         // then
         assertThat(m.multiply(p)).isEqualTo(new Point(-2, 3, 4));
+    }
+
+    @Test
+    public void should_rotate_point_around_x_axis() {
+        // given
+        var p = new Point(0, 1, 0);
+        var halfQuarter = Matrix.newRotation(Math.PI / 4);
+        var fullQuarter = Matrix.newRotation(Math.PI / 2);
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(halfQuarter.multiply(p)).isEqualTo(new Point(0, Math.sqrt(2) / 2, Math.sqrt(2) / 2));
+            it.assertThat(fullQuarter.multiply(p)).isEqualTo(new Point(0, 0, 1));
+        });
+    }
+
+    @Test
+    public void should_rotate_point_around_x_axis_in_opposite_direction_with_inverse() {
+        // given
+        var p = new Point(0, 1, 0);
+        var halfQuarter = Matrix.newRotation(Math.PI / 4).inverse();
+
+        // then
+        assertThat(halfQuarter.multiply(p)).isEqualTo(new Point(0, Math.sqrt(2) / 2, -  Math.sqrt(2) / 2));
     }
 }
