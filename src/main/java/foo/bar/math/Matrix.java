@@ -115,4 +115,27 @@ public class Matrix {
         }
         return 0;
     }
+
+    public Matrix submatrix(int excludedRow, int excludedCol) {
+        if (dimension == 2) {
+            throw new IllegalStateException("Cannot get of submatrix 2x2 matrix");
+        }
+        int newDimension = dimension - 1;
+        var result = new double[newDimension * newDimension];
+
+        for (int row = 0, newRow = 0; row < dimension; row++) {
+            if (row == excludedRow) {
+                continue;
+            }
+            for (int col = 0, newCol = 0; col < dimension; col++) {
+                if (col == excludedCol) {
+                    continue;
+                }
+                result[newRow * newDimension + newCol] = at(row, col);
+                ++newCol;
+            }
+            ++newRow;
+        }
+        return new Matrix(result);
+    }
 }

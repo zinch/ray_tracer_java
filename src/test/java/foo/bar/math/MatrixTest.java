@@ -246,4 +246,44 @@ public class MatrixTest {
         // then
         assertThat(m.determinant()).isEqualTo(17);
     }
+
+    @Test
+    public void should_calculate_submatrix_of_4x4_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            -6, 1, 1, 6,
+            -8, 5, 8, 6,
+            -1, 0, 8, 2,
+            -7, 1, -1, 1
+        });
+
+        // when
+        var s = m.submatrix(2, 1);
+
+        // then
+        assertThat(s).isEqualTo(new Matrix(new double[] {
+            -6, 1, 6,
+            -8, 8, 6,
+            -7, -1, 1
+        }));
+    }
+
+    @Test
+    public void should_calculate_submatrix_of_3x3_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            1, 5, 0,
+            -3, 2, 7,
+            0, 6, -3
+        });
+
+        // when
+        var s = m.submatrix(0, 2);
+
+        // then
+        assertThat(s).isEqualTo(new Matrix(new double[] {
+            -3, 2,
+            0, 6
+        }));
+    }
 }
