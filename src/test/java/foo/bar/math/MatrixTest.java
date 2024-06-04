@@ -321,4 +321,42 @@ public class MatrixTest {
             it.assertThat(m.cofactor(1, 0)).isEqualTo(-25);
         });
     }
+
+    @Test
+    public void should_calculate_determinant_of_3x3_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            1, 2, 6,
+            -5, 8, -4,
+            2, 6, 4
+        });
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            assertThat(m.cofactor(0, 0)).isEqualTo(56);
+            assertThat(m.cofactor(0, 1)).isEqualTo(12);
+            assertThat(m.cofactor(0, 2)).isEqualTo(-46);
+            assertThat(m.determinant()).isEqualTo(-196);
+        });
+    }
+
+    @Test
+    public void should_calculate_determinant_of_4x4_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            -2, -8, 3, 5,
+            -3, 1, 7, 3,
+            1, 2, -9, 6,
+            -6, 7, 7, -9
+        });
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            assertThat(m.cofactor(0, 0)).isEqualTo(690);
+            assertThat(m.cofactor(0, 1)).isEqualTo(447);
+            assertThat(m.cofactor(0, 2)).isEqualTo(210);
+            assertThat(m.cofactor(0, 3)).isEqualTo(51);
+            assertThat(m.determinant()).isEqualTo(-4071);
+        });
+    }
 }

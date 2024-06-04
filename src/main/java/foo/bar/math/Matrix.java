@@ -113,7 +113,11 @@ public class Matrix {
         if (dimension == 2) {
             return values[0] * values[3] - values[1] * values[2];
         }
-        return 0;
+        double det = 0;
+        for (int col = 0; col < dimension; col++) {
+            det += at(0, col) * cofactor(0, col);
+        }
+        return det;
     }
 
     public Matrix submatrix(int excludedRow, int excludedCol) {
