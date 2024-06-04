@@ -142,4 +142,9 @@ public class Matrix {
     public double minor(int row, int col) {
         return submatrix(row, col).determinant();
     }
+
+    public double cofactor(int row, int col) {
+        var sign = (row + col) % 2 == 0 ? 1 : -1;
+        return sign * submatrix(row, col).determinant();
+    }
 }

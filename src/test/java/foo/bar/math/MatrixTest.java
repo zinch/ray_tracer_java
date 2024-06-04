@@ -303,4 +303,22 @@ public class MatrixTest {
         assertThat(m1.determinant()).isEqualTo(25);
         assertThat(m.minor(1, 0)).isEqualTo(25);
     }
+
+    @Test
+    public void should_calculate_cofactor_of_3x3_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+            3, 5, 0,
+            2, -1, -7,
+            6, -1, 5
+        });
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(m.minor(0, 0)).isEqualTo(-12);
+            it.assertThat(m.cofactor(0, 0)).isEqualTo(-12);
+            it.assertThat(m.minor(1, 0)).isEqualTo(25);
+            it.assertThat(m.cofactor(1, 0)).isEqualTo(-25);
+        });
+    }
 }
