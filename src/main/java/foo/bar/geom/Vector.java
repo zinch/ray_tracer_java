@@ -1,5 +1,7 @@
 package foo.bar.geom;
 
+import java.util.Objects;
+
 public class Vector {
     private final Tuple t;
 
@@ -7,8 +9,8 @@ public class Vector {
         this.t = new Tuple(x, y, z, 0.0);
     }
 
-    Vector(Tuple t) {
-        this.t = t;
+    public Vector(Tuple t) {
+        this.t = Objects.requireNonNull(t);
     }
 
     public double x() {
@@ -30,6 +32,22 @@ public class Vector {
     @Override
     public String toString() {
         return "Vector(" + x() + ", " + y() + ", " + z() + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Vector vector)) {
+            return false;
+        }
+        return t.equals(vector.t);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(t);
     }
 
     public Vector add(Vector v) {
@@ -66,5 +84,9 @@ public class Vector {
                 y() * v.z() - z() * v.y(),
                 z() * v.x() - x() * v.z(),
                 x() * v.y() - y() * v.x());
+    }
+
+    public Tuple asTuple() {
+        return t;
     }
 }

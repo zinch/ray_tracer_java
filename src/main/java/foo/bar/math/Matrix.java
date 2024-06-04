@@ -1,6 +1,8 @@
 package foo.bar.math;
 
+import foo.bar.geom.Point;
 import foo.bar.geom.Tuple;
+import foo.bar.geom.Vector;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -23,6 +25,15 @@ public class Matrix {
         }
         this.values = values;
         this.dimension = (int) Math.sqrt(values.length);
+    }
+
+    public static Matrix newTranslation(int x, int y, int z) {
+        return new Matrix(new double[] {
+            1, 0, 0, x,
+            0, 1, 0, y,
+            0, 0, 1, z,
+            0, 0, 0, 1
+        });
     }
 
     public double at(int row, int col) {
@@ -97,6 +108,16 @@ public class Matrix {
         double w = at(3, 0) * t.x() + at(3, 1) * t.y() + at(3, 2) * t.z() + at(3, 3) * t.w();
 
         return new Tuple(x, y, z, w);
+    }
+
+    public Point multiply(Point p) {
+        var t = multiply(p.asTuple());
+        return new Point(t);
+    }
+
+    public Vector multiply(Vector v) {
+        var t = multiply(v.asTuple());
+        return new Vector(t);
     }
 
     public Matrix transpose() {

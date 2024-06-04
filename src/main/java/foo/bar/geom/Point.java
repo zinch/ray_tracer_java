@@ -1,10 +1,16 @@
 package foo.bar.geom;
 
+import java.util.Objects;
+
 public class Point {
     private final Tuple t;
 
     public Point(double x, double y, double z) {
         t = new Tuple(x, y, z, 1.0);
+    }
+
+    public Point(Tuple t) {
+        this.t = Objects.requireNonNull(t);
     }
 
     public double x() {
@@ -28,6 +34,22 @@ public class Point {
         return "Point(" + x() + ", " + y() + ", " + z() + ")";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Point point)) {
+            return false;
+        }
+        return t.equals(point.t);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(t);
+    }
+
     public Point add(Vector v) {
         return new Point(x() + v.x(), y() + v.y(), z() + v.z());
     }
@@ -38,5 +60,9 @@ public class Point {
 
     public Point subtract(Vector v) {
         return new Point(x() - v.x(), y() - v.y(), z() - v.z());
+    }
+
+    public Tuple asTuple() {
+        return t;
     }
 }
