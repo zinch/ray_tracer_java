@@ -36,6 +36,16 @@ public class Matrix {
         });
     }
 
+    public static Matrix newScaling(int a, int b, int c) {
+        return new Matrix(new double[] {
+            a, 0, 0, 0,
+            0, b, 0, 0,
+            0, 0, c, 0,
+            0, 0, 0, 1
+        });
+
+    }
+
     public double at(int row, int col) {
         if (row >= dimension || col >= dimension) {
             throw new IllegalArgumentException("Row or column out of bounds");
