@@ -423,4 +423,53 @@ public class MatrixTest {
             }));
         });
     }
+
+    @Test
+    public void should_calculate_inverse_of_other_matrices() {
+        assertThat(new Matrix(new double[] {
+            8, -5, 9, 2,
+            7, 5, 6, 1,
+            -6, 0, 9, 6,
+            -3, 0, -9, -4
+        }).inverse()).isEqualTo(new Matrix(new double[] {
+            -0.15385, -0.15385, -0.28205, -0.53846,
+            -0.07692, 0.12308, 0.02564, 0.03077,
+            0.35897, 0.35897, 0.43590, 0.92308,
+            -0.69231, -0.69231, -0.76923, -1.92308
+        }));
+
+        assertThat(new Matrix(new double[] {
+            9, 3, 0, 9,
+            -5, -2, -6, -3,
+            -4, 9, 6, 4,
+            -7, 6, 6, 2,
+        }).inverse()).isEqualTo(new Matrix(new double[] {
+            -0.04074, -0.07778, 0.14444, -0.22222,
+            -0.07778, 0.03333, 0.36667, -0.33333,
+            -0.02901, -0.14630, -0.10926, 0.12963,
+            0.17778, 0.06667, -0.26667, 0.33333
+        }));
+    }
+
+    @Test
+    public void should_multiply_product_by_matrix_inverse() {
+        // given
+        var m1 = new Matrix(new double[] {
+            3, -9, 7, 3,
+            3, -8, 2, -9,
+            -4, 4, 4, 1,
+            -6, 5, -1, 1
+        });
+
+        var m2 = new Matrix(new double[] {
+            8, 2, 2, 2,
+            3, -1, 7, 0,
+            7, 0, 5, 4,
+            6, -2, 0, 5
+        });
+
+        // when
+        var m3 = m1.multiply(m2);
+        assertThat(m3.multiply(m2.inverse())).isEqualTo(m1);
+    }
 }
