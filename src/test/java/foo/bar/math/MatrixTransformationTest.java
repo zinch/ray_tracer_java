@@ -66,4 +66,14 @@ public class MatrixTransformationTest {
         // then
         assertThat(m.multiply(v)).isEqualTo(new Vector(-2, 2, 2));
     }
+
+    @Test
+    public void should_reflect_point_across_x_axis_with_a_scaling_matrix() {
+        // given
+        var m = Matrix.newScaling(-1, 1, 1);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(-2, 3, 4));
+    }
 }
