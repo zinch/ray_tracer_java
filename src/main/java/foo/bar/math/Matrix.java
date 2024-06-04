@@ -138,4 +138,8 @@ public class Matrix {
         }
         return new Matrix(result);
     }
+
+    public double minor(int row, int col) {
+        return submatrix(row, col).determinant();
+    }
 }
