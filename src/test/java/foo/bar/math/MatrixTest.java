@@ -11,12 +11,12 @@ public class MatrixTest {
     public void should_create_4x4_matrix() {
         // given
         var matrix = new Matrix(
-            new double[] {
-                1, 2, 3, 4,
-                5.5, 6.5, 7.5, 8.5,
-                9, 10, 11, 12,
-                13.5, 14.5, 15.5, 16.5
-            }
+                new double[] {
+                        1, 2, 3, 4,
+                        5.5, 6.5, 7.5, 8.5,
+                        9, 10, 11, 12,
+                        13.5, 14.5, 15.5, 16.5
+                }
         );
 
         // then
@@ -34,10 +34,10 @@ public class MatrixTest {
     public void should_create_2x2_matrix() {
         // given
         var matrix = new Matrix(
-            new double[] {
-               -3, 5,
-                1, -2
-            }
+                new double[] {
+                        -3, 5,
+                        1, -2
+                }
         );
 
         // then
@@ -53,11 +53,11 @@ public class MatrixTest {
     public void should_create_3x3_matrix() {
         // given
         var matrix = new Matrix(
-            new double[] {
-                -3, 5, 0,
-                1, -2, -7,
-                0, 0, 1
-            }
+                new double[] {
+                        -3, 5, 0,
+                        1, -2, -7,
+                        0, 0, 1
+                }
         );
 
         // then
@@ -74,20 +74,20 @@ public class MatrixTest {
     public void should_test_matrices_for_equality() {
         // given
         var m1 = new Matrix(
-            new double[] {
-                1, 2, 3, 4,
-                5.5, 6.5, 7.5, 8.5,
-                9, 10, 11, 12,
-                13.5, 14.5, 15.5, 16.5
-            }
+                new double[] {
+                        1, 2, 3, 4,
+                        5.5, 6.5, 7.5, 8.5,
+                        9, 10, 11, 12,
+                        13.5, 14.5, 15.5, 16.5
+                }
         );
         var m2 = new Matrix(
-            new double[] {
-                1, 2, 3, 4 - 1e-7,
-                5.5, 6.5, 7.5, 8.5,
-                9, 10, 11, 12 + 1e-7,
-                13.5, 14.5, 15.5, 16.5
-            }
+                new double[] {
+                        1, 2, 3, 4 - 1e-7,
+                        5.5, 6.5, 7.5, 8.5,
+                        9, 10, 11, 12 + 1e-7,
+                        13.5, 14.5, 15.5, 16.5
+                }
         );
 
         // then
@@ -99,18 +99,18 @@ public class MatrixTest {
     public void should_detect_non_equal_matrices() {
         // given
         var m1 = new Matrix(
-            new double[] {
-                1, 2, 3,
-                5.5, 6.5, 7.5,
-                9, 10, 11
-            }
+                new double[] {
+                        1, 2, 3,
+                        5.5, 6.5, 7.5,
+                        9, 10, 11
+                }
         );
         var m2 = new Matrix(
-            new double[] {
-                2, 3, 4,
-                6.5, 7.5, 8.5,
-                10, 11, 12
-            }
+                new double[] {
+                        2, 3, 4,
+                        6.5, 7.5, 8.5,
+                        10, 11, 12
+                }
         );
 
         // then
@@ -122,20 +122,20 @@ public class MatrixTest {
     public void should_multiply_two_matrices() {
         // given
         var m1 = new Matrix(
-            new double[] {
-                1, 2, 3, 4,
-                5, 6, 7, 8,
-                9, 8, 7, 6,
-                5, 4, 3, 2
-            }
+                new double[] {
+                        1, 2, 3, 4,
+                        5, 6, 7, 8,
+                        9, 8, 7, 6,
+                        5, 4, 3, 2
+                }
         );
         var m2 = new Matrix(
-            new double[] {
-                -2, 1, 2, 3,
-                3, 2, 1, -1,
-                4, 3, 6, 5,
-                1, 2, 7, 8
-            }
+                new double[] {
+                        -2, 1, 2, 3,
+                        3, 2, 1, -1,
+                        4, 3, 6, 5,
+                        1, 2, 7, 8
+                }
         );
 
         // when
@@ -143,10 +143,10 @@ public class MatrixTest {
 
         // then
         assertThat(m3).isEqualTo(new Matrix(new double[] {
-            20, 22, 50, 48,
-            44, 54, 114, 108,
-            40, 58, 110, 102,
-            16, 26, 46, 42
+                20, 22, 50, 48,
+                44, 54, 114, 108,
+                40, 58, 110, 102,
+                16, 26, 46, 42
         }));
     }
 
@@ -154,12 +154,12 @@ public class MatrixTest {
     public void should_multiply_matrix_by_typle() {
         // given
         var m = new Matrix(
-            new double[] {
-                1, 2, 3, 4,
-                2, 4, 4, 2,
-                8, 6, 4, 1,
-                0, 0, 0, 1
-            }
+                new double[] {
+                        1, 2, 3, 4,
+                        2, 4, 4, 2,
+                        8, 6, 4, 1,
+                        0, 0, 0, 1
+                }
         );
         var t = new Tuple(1, 2, 3, 1);
 
@@ -174,12 +174,12 @@ public class MatrixTest {
     public void should_not_change_original_matrix_after_multiplying_by_identity_matrix() {
         // given
         var m1 = new Matrix(
-            new double[] {
-                0, 1, 2, 4,
-                1, 2, 4, 8,
-                2, 4, 8, 16,
-                4, 8, 16, 32
-            }
+                new double[] {
+                        0, 1, 2, 4,
+                        1, 2, 4, 8,
+                        2, 4, 8, 16,
+                        4, 8, 16, 32
+                }
         );
 
         // when
@@ -187,10 +187,10 @@ public class MatrixTest {
 
         // then
         assertThat(m2).isEqualTo(new Matrix(new double[] {
-            0, 1, 2, 4,
-            1, 2, 4, 8,
-            2, 4, 8, 16,
-            4, 8, 16, 32
+                0, 1, 2, 4,
+                1, 2, 4, 8,
+                2, 4, 8, 16,
+                4, 8, 16, 32
         }));
     }
 
@@ -210,12 +210,12 @@ public class MatrixTest {
     public void should_transpose_matrix() {
         // given
         var m1 = new Matrix(
-            new double[] {
-                0, 9, 3, 0,
-                9, 8, 0, 8,
-                1, 8, 5, 3,
-                0, 0, 5, 8
-            }
+                new double[] {
+                        0, 9, 3, 0,
+                        9, 8, 0, 8,
+                        1, 8, 5, 3,
+                        0, 0, 5, 8
+                }
         );
 
         // when
@@ -223,10 +223,10 @@ public class MatrixTest {
 
         // then
         assertThat(m2).isEqualTo(new Matrix(new double[] {
-            0, 9, 1, 0,
-            9, 8, 8, 0,
-            3, 0, 5, 5,
-            0, 8, 3, 8
+                0, 9, 1, 0,
+                9, 8, 8, 0,
+                3, 0, 5, 5,
+                0, 8, 3, 8
         }));
     }
 
@@ -239,8 +239,8 @@ public class MatrixTest {
     public void should_calculate_determinant_of_2x2_matrix() {
         // given
         var m = new Matrix(new double[] {
-            1, 5,
-            -3, 2
+                1, 5,
+                -3, 2
         });
 
         // then
@@ -251,10 +251,10 @@ public class MatrixTest {
     public void should_calculate_submatrix_of_4x4_matrix() {
         // given
         var m = new Matrix(new double[] {
-            -6, 1, 1, 6,
-            -8, 5, 8, 6,
-            -1, 0, 8, 2,
-            -7, 1, -1, 1
+                -6, 1, 1, 6,
+                -8, 5, 8, 6,
+                -1, 0, 8, 2,
+                -7, 1, -1, 1
         });
 
         // when
@@ -262,9 +262,9 @@ public class MatrixTest {
 
         // then
         assertThat(s).isEqualTo(new Matrix(new double[] {
-            -6, 1, 6,
-            -8, 8, 6,
-            -7, -1, 1
+                -6, 1, 6,
+                -8, 8, 6,
+                -7, -1, 1
         }));
     }
 
@@ -272,9 +272,9 @@ public class MatrixTest {
     public void should_calculate_submatrix_of_3x3_matrix() {
         // given
         var m = new Matrix(new double[] {
-            1, 5, 0,
-            -3, 2, 7,
-            0, 6, -3
+                1, 5, 0,
+                -3, 2, 7,
+                0, 6, -3
         });
 
         // when
@@ -282,8 +282,8 @@ public class MatrixTest {
 
         // then
         assertThat(s).isEqualTo(new Matrix(new double[] {
-            -3, 2,
-            0, 6
+                -3, 2,
+                0, 6
         }));
     }
 
@@ -291,9 +291,9 @@ public class MatrixTest {
     public void should_calculate_minor_of_3x3_matrix() {
         // given
         var m = new Matrix(new double[] {
-            3, 5, 0,
-            2, -1, 7,
-            6, -1, 5
+                3, 5, 0,
+                2, -1, 7,
+                6, -1, 5
         });
 
         // when
@@ -308,9 +308,9 @@ public class MatrixTest {
     public void should_calculate_cofactor_of_3x3_matrix() {
         // given
         var m = new Matrix(new double[] {
-            3, 5, 0,
-            2, -1, -7,
-            6, -1, 5
+                3, 5, 0,
+                2, -1, -7,
+                6, -1, 5
         });
 
         // then
@@ -326,9 +326,9 @@ public class MatrixTest {
     public void should_calculate_determinant_of_3x3_matrix() {
         // given
         var m = new Matrix(new double[] {
-            1, 2, 6,
-            -5, 8, -4,
-            2, 6, 4
+                1, 2, 6,
+                -5, 8, -4,
+                2, 6, 4
         });
 
         // then
@@ -344,10 +344,10 @@ public class MatrixTest {
     public void should_calculate_determinant_of_4x4_matrix() {
         // given
         var m = new Matrix(new double[] {
-            -2, -8, 3, 5,
-            -3, 1, 7, 3,
-            1, 2, -9, 6,
-            -6, 7, 7, -9
+                -2, -8, 3, 5,
+                -3, 1, 7, 3,
+                1, 2, -9, 6,
+                -6, 7, 7, -9
         });
 
         // then
@@ -364,10 +364,10 @@ public class MatrixTest {
     public void should_determine_invertible_matrix() {
         // given
         var m = new Matrix(new double[] {
-            6, 4, 4, 4,
-            5, 5, 7, 6,
-            4, -9, 3, -7,
-            9, 1, 7, -6
+                6, 4, 4, 4,
+                5, 5, 7, 6,
+                4, -9, 3, -7,
+                9, 1, 7, -6
         });
 
         // then
@@ -381,16 +381,46 @@ public class MatrixTest {
     public void should_determine_non_invertible_matrix() {
         // given
         var m = new Matrix(new double[] {
-            -4, 2, -2, -3,
-            9, 6, 2, 6,
-            0, -5, 1, -5,
-            0, 0, 0, 0
+                -4, 2, -2, -3,
+                9, 6, 2, 6,
+                0, -5, 1, -5,
+                0, 0, 0, 0
         });
 
         // then
         SoftAssertions.assertSoftly(it -> {
             it.assertThat(m.determinant()).isEqualTo(0);
             it.assertThat(m.isInvertible()).isFalse();
+        });
+    }
+
+    @Test
+    public void should_calculate_inverse_of_a_matrix() {
+        // given
+        var m = new Matrix(new double[] {
+                -5, 2, 6, -8,
+                1, -5, 1, 8,
+                7, 7, -6, -7,
+                1, -3, 7, 4
+        });
+
+        // when
+        var m1 = m.inverse();
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(m.determinant()).isEqualTo(532);
+            it.assertThat(m.cofactor(2, 3)).isEqualTo(-160);
+            it.assertThat(m.cofactor(3, 2)).isEqualTo(105);
+            it.assertThat(m1.at(2, 3)).isEqualTo(105.0 / 532.0);
+            it.assertThat(m.cofactor(3, 2)).isEqualTo(105);
+            it.assertThat(m1.at(3, 2)).isEqualTo(-160.0 / 532.0);
+            it.assertThat(m1).isEqualTo(new Matrix(new double[] {
+                0.21805, 0.45113, 0.24060, -0.04511,
+                -0.80827, -1.45677, -0.44361, 0.52068,
+                -0.07895, -0.22368, -0.05263, 0.19737,
+                -0.52256, -0.81391, -0.30075, 0.30639
+            }));
         });
     }
 }

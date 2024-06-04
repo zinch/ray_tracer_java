@@ -1,7 +1,7 @@
 package foo.bar.math;
 
 public class MathUtils {
-    private static final double EPSILON = 1e-6;
+    private static final double EPSILON = 1e-5;
 
     private MathUtils() {
     }

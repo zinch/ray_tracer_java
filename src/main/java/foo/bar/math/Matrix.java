@@ -155,4 +155,18 @@ public class Matrix {
     public boolean isInvertible() {
         return !MathUtils.areEqual(determinant(), 0);
     }
+
+    public Matrix inverse() {
+        if (!isInvertible()) {
+            throw new IllegalStateException("Matrix is not invertible");
+        }
+        var determinant = determinant();
+        var cofactors = new double[dimension * dimension];
+        for (int row = 0; row < dimension; row++) {
+            for (int col = 0; col < dimension; col++) {
+                cofactors[idx(col, row)] = cofactor(row, col) / determinant;
+            }
+        }
+        return new Matrix(cofactors);
+    }
 }
