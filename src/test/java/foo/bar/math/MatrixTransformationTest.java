@@ -149,4 +149,64 @@ public class MatrixTransformationTest {
         // then
         assertThat(halfQuarter.multiply(p)).isEqualTo(new Point(Math.sqrt(2) / 2, Math.sqrt(2) / 2, 0));
     }
+
+    @Test
+    public void should_move_x_in_proportion_to_y_with_shearing_transformation() {
+        // given
+        var m = Matrix.newShearing(1, 0, 0, 0, 0, 0);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(5, 3, 4));
+    }
+
+    @Test
+    public void should_move_x_in_proportion_to_z_with_shearing_transformation() {
+        // given
+        var m = Matrix.newShearing(0, 1, 0, 0, 0, 0);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(6, 3, 4));
+    }
+
+    @Test
+    public void should_move_y_in_proportion_to_x_with_shearing_transformation() {
+        // given
+        var m = Matrix.newShearing(0, 0, 1, 0, 0, 0);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(2, 5, 4));
+    }
+
+    @Test
+    public void should_move_y_in_proportion_to_z_with_shearing_transformation() {
+        // given
+        var m = Matrix.newShearing(0, 0, 0, 1, 0, 0);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(2, 7, 4));
+    }
+
+    @Test
+    public void should_move_z_in_proportion_to_x_with_shearing_transformation() {
+        // given
+        var m = Matrix.newShearing(0, 0, 0, 0, 1, 0);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(2, 3, 6));
+    }
+
+    @Test
+    public void should_move_z_in_proportion_to_y_with_shearing_transformation() {
+        // given
+        var m = Matrix.newShearing(0, 0, 0, 0, 0, 1);
+        var p = new Point(2, 3, 4);
+
+        // then
+        assertThat(m.multiply(p)).isEqualTo(new Point(2, 3, 7));
+    }
 }

@@ -72,6 +72,15 @@ public class Matrix {
         });
     }
 
+    public static Matrix newShearing(int xy, int xz, int yx, int yz, int zx, int zy) {
+        return new Matrix(new double[] {
+            1, xy, xz, 0,
+            yx, 1, yz, 0,
+            zx, zy, 1, 0,
+            0, 0, 0, 1
+        });
+    }
+
     public double at(int row, int col) {
         if (row >= dimension || col >= dimension) {
             throw new IllegalArgumentException("Row or column out of bounds");
