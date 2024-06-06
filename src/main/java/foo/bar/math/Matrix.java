@@ -45,11 +45,20 @@ public class Matrix {
         });
     }
 
-    public static Matrix newRotation(double rad) {
+    public static Matrix newRotationX(double rad) {
         return new Matrix(new double[] {
             1, 0, 0, 0,
             0, Math.cos(rad), -Math.sin(rad), 0,
             0, Math.sin(rad), Math.cos(rad), 0,
+            0, 0, 0, 1
+        });
+    }
+
+    public static Matrix newRotationY(double rad) {
+        return new Matrix(new double[] {
+            Math.cos(rad), 0, Math.sin(rad), 0,
+            0, 1, 0, 0,
+            -Math.sin(rad), 0, Math.cos(rad), 0,
             0, 0, 0, 1
         });
     }
