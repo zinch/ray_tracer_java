@@ -125,4 +125,28 @@ public class MatrixTransformationTest {
         // then
         assertThat(halfQuarter.multiply(p)).isEqualTo(new Point(-Math.sqrt(2) / 2, 0, Math.sqrt(2) / 2));
     }
+
+    @Test
+    public void should_rotate_point_around_z_axis() {
+        // given
+        var p = new Point(0, 1, 0);
+        var halfQuarter = Matrix.newRotationZ(Math.PI / 4);
+        var fullQuarter = Matrix.newRotationZ(Math.PI / 2);
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(halfQuarter.multiply(p)).isEqualTo(new Point(-Math.sqrt(2) / 2, Math.sqrt(2) / 2, 0));
+            it.assertThat(fullQuarter.multiply(p)).isEqualTo(new Point(-1, 0, 0));
+        });
+    }
+
+    @Test
+    public void should_rotate_point_around_z_axis_in_opposite_direction_with_inverse() {
+        // given
+        var p = new Point(0, 1, 0);
+        var halfQuarter = Matrix.newRotationZ(Math.PI / 4).inverse();
+
+        // then
+        assertThat(halfQuarter.multiply(p)).isEqualTo(new Point(Math.sqrt(2) / 2, Math.sqrt(2) / 2, 0));
+    }
 }
