@@ -48,9 +48,9 @@ public class RayTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections).hasSize(2);
-            it.assertThat(intersections.get(0)).isEqualTo(4);
-            it.assertThat(intersections.get(1)).isEqualTo(6);
+            it.assertThat(intersections.isEmpty()).isFalse();
+            it.assertThat(intersections.first()).isEqualTo(4);
+            it.assertThat(intersections.second()).isEqualTo(6);
         });
     }
 
@@ -65,9 +65,9 @@ public class RayTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections).hasSize(2);
-            it.assertThat(intersections.get(0)).isEqualTo(5);
-            it.assertThat(intersections.get(1)).isEqualTo(5);
+            it.assertThat(intersections.isEmpty()).isFalse();
+            it.assertThat(intersections.first()).isEqualTo(5);
+            it.assertThat(intersections.second()).isEqualTo(5);
         });
     }
 
@@ -82,7 +82,7 @@ public class RayTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections).isEmpty();
+            it.assertThat(intersections.isEmpty()).isTrue();
         });
     }
 
@@ -97,9 +97,9 @@ public class RayTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections).hasSize(2);
-            it.assertThat(intersections.get(0)).isEqualTo(-1);
-            it.assertThat(intersections.get(1)).isEqualTo(1);
+            it.assertThat(intersections.isEmpty()).isFalse();
+            it.assertThat(intersections.first()).isEqualTo(-1);
+            it.assertThat(intersections.second()).isEqualTo(1);
         });
     }
 
@@ -114,9 +114,9 @@ public class RayTest {
 
         // then
         SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections).hasSize(2);
-            it.assertThat(intersections.get(0)).isEqualTo(-6);
-            it.assertThat(intersections.get(1)).isEqualTo(-4);
+            it.assertThat(intersections.isEmpty()).isFalse();
+            it.assertThat(intersections.first()).isEqualTo(-6);
+            it.assertThat(intersections.second()).isEqualTo(-4);
         });
     }
 }
