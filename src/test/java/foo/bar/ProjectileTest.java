@@ -29,7 +29,7 @@ public class ProjectileTest {
         }
     }
 
-    private final Color color = new Color(231/255.0, 76/255.0, 60/255.0);
+    private final Color color = new Color(231 / 255.0, 76 / 255.0, 60 / 255.0);
     private Canvas canvas;
 
     @Before
@@ -51,7 +51,7 @@ public class ProjectileTest {
         drawPixel(projectile);
 
         // when
-        while (projectile.position().y()> 0) {
+        while (projectile.position().y() > 0) {
             projectile = projectile.tick(env);
             drawPixel(projectile);
 
