@@ -3,6 +3,8 @@ package foo.bar.geom;
 import java.util.Objects;
 
 public class Point {
+    public static final Point ORIGIN = new Point(0, 0, 0);
+
     private final Tuple t;
 
     public Point(double x, double y, double z) {
