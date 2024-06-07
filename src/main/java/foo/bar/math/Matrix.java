@@ -235,4 +235,28 @@ public class Matrix {
         }
         return new Matrix(cofactors);
     }
+
+    public Matrix translate(int x, int y, int z) {
+        return Matrix.newTranslation(x, y, z).multiply(this);
+    }
+
+    public Matrix scale(int a, int b, int c) {
+        return Matrix.newScaling(a, b, c).multiply(this);
+    }
+
+    public Matrix rotateX(double rad) {
+        return Matrix.newRotationX(rad).multiply(this);
+    }
+
+    public Matrix rotateY(double rad) {
+        return Matrix.newRotationY(rad).multiply(this);
+    }
+
+    public Matrix rotateZ(double rad) {
+        return Matrix.newRotationZ(rad).multiply(this);
+    }
+
+    public Matrix shear(int xy, int xz, int yx, int yz, int zx, int zy) {
+        return Matrix.newShearing(xy, xz, yx, yz, zx, zy).multiply(this);
+    }
 }

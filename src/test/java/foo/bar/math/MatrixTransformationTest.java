@@ -245,4 +245,19 @@ public class MatrixTransformationTest {
         var p2 = T.multiply(p1);
         assertThat(p2).isEqualTo(new Point(15, 0, 7));
     }
+
+    @Test
+    public void should_implement_fluent_api_for_transformation() {
+        // given
+        var p1 = new Point(1, 0, 1);
+
+        var T = Matrix.IDENTITY
+                .rotateX(Math.PI / 2)
+                .scale(5, 5, 5)
+                .translate(10, 5, 7);
+
+        // then
+        var p2 = T.multiply(p1);
+        assertThat(p2).isEqualTo(new Point(15, 0, 7));
+    }
 }
