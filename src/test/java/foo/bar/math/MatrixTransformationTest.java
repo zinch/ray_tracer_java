@@ -209,4 +209,40 @@ public class MatrixTransformationTest {
         // then
         assertThat(m.multiply(p)).isEqualTo(new Point(2, 3, 7));
     }
+
+    @Test
+    public void should_apply_individual_transformations() {
+        // given
+        var p1 = new Point(1, 0, 1);
+
+        var A = Matrix.newRotationX(Math.PI / 2);
+        var B = Matrix.newScaling(5, 5, 5);
+        var C = Matrix.newTranslation(10, 5, 7);
+
+        // then
+        var p2 = A.multiply(p1);
+        assertThat(p2).isEqualTo(new Point(1, -1, 0));
+
+        var p3 = B.multiply(p2);
+        assertThat(p3).isEqualTo(new Point(5, -5, 0));
+
+        var p4 = C.multiply(p3);
+        assertThat(p4).isEqualTo(new Point(15, 0, 7));
+    }
+
+    @Test
+    public void should_chain_multiple_transformations() {
+        // given
+        var p1 = new Point(1, 0, 1);
+
+        var A = Matrix.newRotationX(Math.PI / 2);
+        var B = Matrix.newScaling(5, 5, 5);
+        var C = Matrix.newTranslation(10, 5, 7);
+
+        var T = C.multiply(B.multiply(A));
+
+        // then
+        var p2 = T.multiply(p1);
+        assertThat(p2).isEqualTo(new Point(15, 0, 7));
+    }
 }
