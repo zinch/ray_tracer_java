@@ -21,4 +21,18 @@ public class RayTest {
             it.assertThat(ray.direction()).isSameAs(direction);
         });
     }
+
+    @Test
+    public void should_compute_point_from_a_distance() {
+        // given
+        var ray = new Ray(new Point(2, 3, 4), new Vector(1, 0, 0));
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(ray.positionAt(0)).isEqualTo(new Point(2, 3, 4));
+            it.assertThat(ray.positionAt(1)).isEqualTo(new Point(3, 3, 4));
+            it.assertThat(ray.positionAt(-1)).isEqualTo(new Point(1, 3, 4));
+            it.assertThat(ray.positionAt(2.5)).isEqualTo(new Point(4.5, 3, 4));
+        });
+    }
 }
