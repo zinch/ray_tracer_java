@@ -1,4 +1,4 @@
-package foo.bar;
+package foo.bar.util;
 
 import java.security.SecureRandom;
 import java.util.stream.IntStream;
