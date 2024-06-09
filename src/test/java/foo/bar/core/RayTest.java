@@ -6,6 +6,7 @@ import static org.assertj.core.groups.Tuple.tuple;
 import foo.bar.geom.Point;
 import foo.bar.geom.Sphere;
 import foo.bar.geom.Vector;
+import foo.bar.math.Matrix;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -111,5 +112,31 @@ public class RayTest {
         SoftAssertions.assertSoftly(it -> it.assertThat(intersections)
                 .extracting(RayIntersection::t, RayIntersection::object)
                 .containsExactly(tuple(-6.0, s), tuple(-4.0, s)));
+    }
+
+    @Test
+    public void should_translate_a_ray() {
+        // given
+        var r1 = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0));
+        var m = Matrix.newTranslation(3, 4, 5);
+
+        // when
+        var r2 = r1.transform(m);
+
+        // then
+        assertThat(r2).isEqualTo(new Ray(new Point(4, 6, 8), new Vector(0, 1, 0)));
+    }
+
+    @Test
+    public void should_scale_a_ray() {
+        // given
+        var r1 = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0));
+        var m = Matrix.newScaling(2, 3, 4);
+
+        // when
+        var r2 = r1.transform(m);
+
+        // then
+        assertThat(r2).isEqualTo(new Ray(new Point(2, 6, 12), new Vector(0, 3, 0)));
     }
 }

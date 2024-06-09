@@ -3,6 +3,7 @@ package foo.bar.core;
 import foo.bar.geom.Point;
 import foo.bar.geom.Sphere;
 import foo.bar.geom.Vector;
+import foo.bar.math.Matrix;
 
 public record Ray(Point origin, Vector direction) {
     private static final RayIntersection[] EMPTY_INTERSECTION = new RayIntersection[0];
@@ -26,5 +27,9 @@ public record Ray(Point origin, Vector direction) {
         var t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 
         return new RayIntersection[] {new RayIntersection(t1, s), new RayIntersection(t2, s)};
+    }
+
+    public Ray transform(Matrix m) {
+        return new Ray(m.multiply(origin), m.multiply(direction));
     }
 }
