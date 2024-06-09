@@ -12,9 +12,13 @@ public record Ray(Point origin, Vector direction) {
     }
 
     public RayIntersection[] intersect(Sphere s) {
-        var sphereToRay = origin.subtract(Point.ORIGIN);
-        var a = direction.dot(direction);
-        var b = 2 * direction.dot(sphereToRay);
+        Matrix worldToObject = s.getTransformation().inverse();
+        var newOrigin = worldToObject.multiply(origin);
+        var newDirection = worldToObject.multiply(direction);
+
+        var sphereToRay = newOrigin.subtract(Point.ORIGIN);
+        var a = newDirection.dot(newDirection);
+        var b = 2 * newDirection.dot(sphereToRay);
         var c = sphereToRay.dot(sphereToRay) - 1;
 
         var discriminant = b*b - 4*a*c;
@@ -27,9 +31,5 @@ public record Ray(Point origin, Vector direction) {
         var t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 
         return new RayIntersection[] {new RayIntersection(t1, s), new RayIntersection(t2, s)};
-    }
-
-    public Ray transform(Matrix m) {
-        return new Ray(m.multiply(origin), m.multiply(direction));
     }
 }

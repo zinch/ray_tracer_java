@@ -115,28 +115,32 @@ public class RayTest {
     }
 
     @Test
-    public void should_translate_a_ray() {
+    public void should_intersect_scaled_sphere() {
         // given
-        var r1 = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0));
-        var m = Matrix.newTranslation(3, 4, 5);
+        var r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+        var s = new Sphere();
+        s.setTransformation(Matrix.newScaling(2, 2, 2));
 
         // when
-        var r2 = r1.transform(m);
+        var intersections = r.intersect(s);
 
         // then
-        assertThat(r2).isEqualTo(new Ray(new Point(4, 6, 8), new Vector(0, 1, 0)));
+        SoftAssertions.assertSoftly(it -> it.assertThat(intersections)
+                .extracting(RayIntersection::t)
+                .containsExactly(3.0, 7.0));
     }
 
     @Test
-    public void should_scale_a_ray() {
+    public void should_intersect_translated_sphere() {
         // given
-        var r1 = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0));
-        var m = Matrix.newScaling(2, 3, 4);
+        var r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+        var s = new Sphere();
+        s.setTransformation(Matrix.newTranslation(5, 0, 0));
 
         // when
-        var r2 = r1.transform(m);
+        var intersections = r.intersect(s);
 
         // then
-        assertThat(r2).isEqualTo(new Ray(new Point(2, 6, 12), new Vector(0, 3, 0)));
+        assertThat(intersections).isEmpty();
     }
 }
