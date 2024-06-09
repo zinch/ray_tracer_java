@@ -1,6 +1,7 @@
 package foo.bar.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.groups.Tuple.tuple;
 
 import foo.bar.geom.Point;
 import foo.bar.geom.Sphere;
@@ -49,11 +50,9 @@ public class RayTest {
         var intersections = ray.intersect(s);
 
         // then
-        SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.first().t()).isEqualTo(4);
-            it.assertThat(intersections.second().t()).isEqualTo(6);
-        });
+        SoftAssertions.assertSoftly(it -> it.assertThat(intersections)
+                .extracting(RayIntersection::t, RayIntersection::object)
+                .containsExactly(tuple(4.0, s), tuple(6.0, s)));
     }
 
     @Test
@@ -66,11 +65,9 @@ public class RayTest {
         var intersections = ray.intersect(s);
 
         // then
-        SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.first().t()).isEqualTo(5);
-            it.assertThat(intersections.second().t()).isEqualTo(5);
-        });
+        SoftAssertions.assertSoftly(it -> it.assertThat(intersections)
+                .extracting(RayIntersection::t, RayIntersection::object)
+                .containsExactly(tuple(5.0, s), tuple(5.0, s)));
     }
 
     @Test
@@ -83,7 +80,7 @@ public class RayTest {
         var intersections = ray.intersect(s);
 
         // then
-        assertThat(intersections.isEmpty()).isTrue();
+        assertThat(intersections).isEmpty();
     }
 
     @Test
@@ -96,15 +93,9 @@ public class RayTest {
         var intersections = ray.intersect(s);
 
         // then
-        SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.first())
-                    .extracting("t", "object")
-                    .containsExactly(-1.0, s);
-            it.assertThat(intersections.second())
-                    .extracting("t", "object")
-                    .containsExactly(1.0, s);
-        });
+        SoftAssertions.assertSoftly(it -> it.assertThat(intersections)
+                .extracting(RayIntersection::t, RayIntersection::object)
+                .containsExactly(tuple(-1.0, s), tuple(1.0, s)));
     }
 
     @Test
@@ -117,10 +108,8 @@ public class RayTest {
         var intersections = ray.intersect(s);
 
         // then
-        SoftAssertions.assertSoftly(it -> {
-            it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.first().t()).isEqualTo(-6);
-            it.assertThat(intersections.second().t()).isEqualTo(-4);
-        });
+        SoftAssertions.assertSoftly(it -> it.assertThat(intersections)
+                .extracting(RayIntersection::t, RayIntersection::object)
+                .containsExactly(tuple(-6.0, s), tuple(-4.0, s)));
     }
 }
