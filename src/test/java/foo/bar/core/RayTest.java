@@ -98,8 +98,12 @@ public class RayTest {
         // then
         SoftAssertions.assertSoftly(it -> {
             it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.fst().t()).isEqualTo(-1);
-            it.assertThat(intersections.snd().t()).isEqualTo(1);
+            it.assertThat(intersections.fst())
+                    .extracting("t", "object")
+                    .containsExactly(-1.0, s);
+            it.assertThat(intersections.snd())
+                    .extracting("t", "object")
+                    .containsExactly(1.0, s);
         });
     }
 
