@@ -1,7 +1,7 @@
 package foo.bar.geom;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import foo.bar.math.Matrix;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
 public class SphereTest {
@@ -11,6 +11,25 @@ public class SphereTest {
         var s = new Sphere();
 
         // then
-        assertThat(s.getId()).hasSize(10);
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(s.getId()).hasSize(10);
+            it.assertThat(s.getTransformation()).isSameAs(Matrix.IDENTITY);
+        });
+    }
+
+    @Test
+    public void should_allow_changing_transformation() {
+        // given
+        var s = new Sphere();
+        Matrix m = Matrix.newTranslation(2, 3, 4);
+
+        // when
+        s.setTransformation(m);
+
+        // then
+        SoftAssertions.assertSoftly(it -> {
+            it.assertThat(s.getId()).hasSize(10);
+            it.assertThat(s.getTransformation()).isSameAs(m);
+        });
     }
 }
