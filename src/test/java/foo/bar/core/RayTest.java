@@ -51,8 +51,8 @@ public class RayTest {
         // then
         SoftAssertions.assertSoftly(it -> {
             it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.fst().t()).isEqualTo(4);
-            it.assertThat(intersections.snd().t()).isEqualTo(6);
+            it.assertThat(intersections.first().t()).isEqualTo(4);
+            it.assertThat(intersections.second().t()).isEqualTo(6);
         });
     }
 
@@ -68,8 +68,8 @@ public class RayTest {
         // then
         SoftAssertions.assertSoftly(it -> {
             it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.fst().t()).isEqualTo(5);
-            it.assertThat(intersections.snd().t()).isEqualTo(5);
+            it.assertThat(intersections.first().t()).isEqualTo(5);
+            it.assertThat(intersections.second().t()).isEqualTo(5);
         });
     }
 
@@ -98,10 +98,10 @@ public class RayTest {
         // then
         SoftAssertions.assertSoftly(it -> {
             it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.fst())
+            it.assertThat(intersections.first())
                     .extracting("t", "object")
                     .containsExactly(-1.0, s);
-            it.assertThat(intersections.snd())
+            it.assertThat(intersections.second())
                     .extracting("t", "object")
                     .containsExactly(1.0, s);
         });
@@ -119,8 +119,8 @@ public class RayTest {
         // then
         SoftAssertions.assertSoftly(it -> {
             it.assertThat(intersections.isEmpty()).isFalse();
-            it.assertThat(intersections.fst().t()).isEqualTo(-6);
-            it.assertThat(intersections.snd().t()).isEqualTo(-4);
+            it.assertThat(intersections.first().t()).isEqualTo(-6);
+            it.assertThat(intersections.second().t()).isEqualTo(-4);
         });
     }
 }
