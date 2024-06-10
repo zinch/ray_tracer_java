@@ -4,6 +4,7 @@ import foo.bar.color.Color;
 import foo.bar.core.Ray;
 import foo.bar.geom.Point;
 import foo.bar.geom.Sphere;
+import foo.bar.math.Matrix;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,8 +26,14 @@ public class SphereSilhouetteTest {
     public void should_project_sphere_onto_canvas() throws IOException {
         Point rayOrigin = new Point(0, 0, -5);
         var s = new Sphere();
+        s.setTransformation(Matrix
+                .newScaling(1, 0.5, 1)
+                .rotateZ(Math.PI / 4)
+                .shear(0, 0, 0, 1, 0, 0)
+                .rotateY(-Math.PI / 6));
+
         double canvasDistance = 10;
-        double wallSize = 7;
+        double wallSize = 10;
 
         var pixelSize = wallSize / CANVAS_SIZE;
         var half = wallSize / 2;
@@ -46,15 +53,5 @@ public class SphereSilhouetteTest {
         }
 
         Files.writeString(Paths.get("sphere_silhouette.ppm"), canvas.toPpm());
-    }
-
-    private void drawPixel(Point p) {
-        int canvasX = (int) p.x() + CANVAS_SIZE / 2;
-        var canvasY = (int) (CANVAS_SIZE / 2 - p.y() - 1);
-        try {
-            canvas.writePixel(color, canvasX, canvasY);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
     }
 }

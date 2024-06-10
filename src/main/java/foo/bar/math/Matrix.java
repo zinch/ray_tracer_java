@@ -27,7 +27,7 @@ public class Matrix {
         this.dimension = (int) Math.sqrt(values.length);
     }
 
-    public static Matrix newTranslation(int x, int y, int z) {
+    public static Matrix newTranslation(double x, double y, double z) {
         return new Matrix(new double[] {
             1, 0, 0, x,
             0, 1, 0, y,
@@ -36,7 +36,7 @@ public class Matrix {
         });
     }
 
-    public static Matrix newScaling(int a, int b, int c) {
+    public static Matrix newScaling(double a, double b, double c) {
         return new Matrix(new double[] {
             a, 0, 0, 0,
             0, b, 0, 0,
@@ -72,7 +72,7 @@ public class Matrix {
         });
     }
 
-    public static Matrix newShearing(int xy, int xz, int yx, int yz, int zx, int zy) {
+    public static Matrix newShearing(double xy, double xz, double yx, double yz, double zx, double zy) {
         return new Matrix(new double[] {
             1, xy, xz, 0,
             yx, 1, yz, 0,
