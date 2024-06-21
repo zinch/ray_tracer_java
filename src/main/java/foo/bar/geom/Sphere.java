@@ -30,4 +30,8 @@ public class Sphere {
     public void setTransformation(Matrix transformation) {
         this.transformation = Objects.requireNonNull(transformation);
     }
+
+    public Vector normalAt(Point point) {
+        return point.subtract(Point.ORIGIN);
+    }
 }
