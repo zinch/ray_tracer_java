@@ -31,7 +31,10 @@ public class Sphere {
         this.transformation = Objects.requireNonNull(transformation);
     }
 
-    public Vector normalAt(Point point) {
-        return point.subtract(Point.ORIGIN);
+    public Vector normalAt(Point worldPoint) {
+        var inverse = transformation.inverse();
+        var objectPoint = inverse.multiply(worldPoint);
+        var objectNormal =  objectPoint.subtract(Point.ORIGIN);
+        return inverse.transpose().multiply(objectNormal).normalize();
     }
 }

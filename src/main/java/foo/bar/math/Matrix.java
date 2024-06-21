@@ -17,6 +17,8 @@ public class Matrix {
 
     private final double[] values;
     private final int dimension;
+    private Matrix inverse;
+    private Matrix transpose;
 
     public Matrix(double[] values) {
         Objects.requireNonNull(values);
@@ -145,7 +147,7 @@ public class Matrix {
 
     public Tuple multiply(Tuple t) {
         if (dimension != 4) {
-            throw new IllegalArgumentException("Can multiply 4x4 matrix by tuple");
+            throw new IllegalArgumentException("Can multiply only 4x4 matrix by tuple");
         }
         double x = at(0, 0) * t.x() + at(0, 1) * t.y() + at(0, 2) * t.z() + at(0, 3) * t.w();
         double y = at(1, 0) * t.x() + at(1, 1) * t.y() + at(1, 2) * t.z() + at(1, 3) * t.w();
@@ -166,13 +168,17 @@ public class Matrix {
     }
 
     public Matrix transpose() {
+        if (transpose != null) {
+            return transpose;
+        }
         var result = new double[dimension * dimension];
         for (int row = 0; row < dimension; row++) {
             for (int col = 0; col < dimension; col++) {
                 result[idx(row, col)] = at(col, row);
             }
         }
-        return new Matrix(result);
+        transpose = new Matrix(result);
+        return transpose;
     }
 
     public double determinant() {
@@ -223,6 +229,10 @@ public class Matrix {
     }
 
     public Matrix inverse() {
+        if (inverse != null) {
+            return inverse;
+        }
+
         if (!isInvertible()) {
             throw new IllegalStateException("Matrix is not invertible");
         }
@@ -233,14 +243,15 @@ public class Matrix {
                 cofactors[idx(col, row)] = cofactor(row, col) / determinant;
             }
         }
-        return new Matrix(cofactors);
+        inverse = new Matrix(cofactors);
+        return inverse;
     }
 
     public Matrix translate(int x, int y, int z) {
         return Matrix.newTranslation(x, y, z).multiply(this);
     }
 
-    public Matrix scale(int a, int b, int c) {
+    public Matrix scale(double a, double b, double c) {
         return Matrix.newScaling(a, b, c).multiply(this);
     }
 
